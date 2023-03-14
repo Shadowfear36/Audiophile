@@ -1,87 +1,94 @@
 import React, { useState, useRef, useEffect } from 'react';
+import './audioplayer.css';
 
-export default function AudioPlayer(props) {
-
-  // create states
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.5);
+function AudioPlayer(props) {
+  //set states
   const [currentTime, setCurrentTime] = useState(0);
+  const [volume, setVolume] = useState(0.5);
   const [duration, setDuration] = useState(0);
-
-  // create reference to audio
+  const [isPlaying, setIsPlaying] = useState(false);
+  // create a reference to the Audio tag itself
   const audioRef = useRef(null);
 
-  // update current time and duration on mount and on song change
+  //useEffect to ensure it only attempts to fetch metadata once
   useEffect(() => {
-    const handleLoadedMetadata = () => {
-      setDuration(audioRef.current.duration);
-    };
+    const audio = audioRef.current;
 
+    //updates time location of song
     const handleTimeUpdate = () => {
-      setCurrentTime(audioRef.current.currentTime);
+      setCurrentTime(audio.currentTime);
     };
 
-    audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
-    audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+    // updates song duration from file metadata
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration);
+    };
 
+    //event listeners to call on above functions
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+
+    //once metadata retrieved quit listening for changes
     return () => {
-      audioRef.current.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
     };
-  }, [props.src]);
+  }, []);
 
-  const handlePlayPause = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.play();
-      setIsPlaying(true);
-    }
-  };
-
-  // skip forwards by 30 seconds
-  const handleSkipForward = () => {
-    audioRef.current.currentTime += 30;
-  };
-
-  // skip backwards by 30 seconds
-  const handleSkipBackward = () => {
-    audioRef.current.currentTime -= 30;
-  };
-
-  // update volume based on range update
+  //handle volume change on range
   const handleVolumeChange = (event) => {
-    const newVolume = event.target.value;
-    setVolume(newVolume);
-    audioRef.current.volume = newVolume;
+    setVolume(event.target.value);
+    audioRef.current.volume = event.target.value;
   };
 
-  // calculate progress percentage
-  const progress = (currentTime / duration) * 100;
+  //handle time change on progress range
+  const handleTimeChange = (event) => {
+    setCurrentTime(event.target.value);
+    audioRef.current.currentTime = event.target.value;
+  };
+
+  //play pause handler
+  const handlePlayPauseClick = () => {
+    const audio = audioRef.current;
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
 
   return (
-    <div>
-      <audio src={props.src} ref={audioRef} />
-      <button onClick={handlePlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>
-      <button onClick={handleSkipBackward}>Skip Backward</button>
-      <button onClick={handleSkipForward}>Skip Forward</button>
-      <br />
-      <label>
-        Volume:
+    <div className="audio-player">
+      <audio ref={audioRef} src={props.src} />
+      <div className="controls">
+        <button onClick={handlePlayPauseClick}>
+          {isPlaying ? 'Pause' : 'Play'}
+        </button>
+        <label>
+            Volume
+            <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={volume}
+            onChange={handleVolumeChange}
+            />
+        </label>
         <input
           type="range"
           min="0"
-          max="1"
-          step="0.1"
-          value={volume}
-          onChange={handleVolumeChange}
+          max={duration}
+          value={currentTime}
+          onChange={handleTimeChange}
         />
-      </label>
-      <br />
-      <div className="progress-bar-container">
-        <div className="progress-bar"></div>
+        <label>
+            {currentTime}
+        </label>
       </div>
     </div>
   );
 }
+
+export default AudioPlayer;
