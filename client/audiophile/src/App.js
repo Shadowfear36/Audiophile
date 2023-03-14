@@ -12,6 +12,11 @@ function App() {
           exact
           element={<Login />}
         />
+        <Route
+          path="/signup"
+          exact
+          element={<Signup />}
+        />
       </Routes>
     </div>
   );

@@ -1,5 +1,6 @@
 import React from 'react'
 import './login.css';
+import { NavLink } from 'react-router-dom';
 
 export default function Login() {
   return (
@@ -14,6 +15,7 @@ export default function Login() {
                     <label for="password">Password</label>
                     <input name="password"type="text"/>
                     <button type="submit">Login</button>
+                    <NavLink to="/signup"><h5>Not Signed Up? </h5></NavLink>
                 </form>
             </div>
         </div>

@@ -48,3 +48,12 @@
 #login-form > label {
     padding-left: 18px;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: lightgray;
+}
