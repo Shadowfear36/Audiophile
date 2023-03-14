@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_13_230936) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_14_030850) do
   create_table "albums", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
@@ -23,6 +23,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_230936) do
     t.string "text"
     t.integer "user_id"
     t.integer "album_id"
+    t.integer "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "song_id"
+    t.integer "album_id"
+    t.integer "playlist_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "playlist_songs", force: :cascade do |t|
+    t.integer "playlist_id"
     t.integer "song_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,9 +65,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_230936) do
     t.string "name"
     t.string "email"
     t.string "username"
-    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
 end
