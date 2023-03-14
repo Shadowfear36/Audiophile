@@ -5506,3 +5506,151 @@ Migrating to AddPasswordDigestToUsers (20230314030850)
   [1m[36mSong Load (0.0ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
   [1m[36mPlaylistSong Create (0.2ms)[0m  [1m[32mINSERT INTO "playlist_songs" ("playlist_id", "song_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["playlist_id", 1], ["song_id", 1], ["created_at", "2023-03-14 03:28:55.742543"], ["updated_at", "2023-03-14 03:28:55.742543"]]
   [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+Started POST "/login" for ::1 at 2023-03-13 20:55:37 -0700
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `helper_method' for ApplicationController:Class):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<top (required)>'
+app/controllers/sessions_controller.rb:1:in `<top (required)>'
+Started POST "/login" for ::1 at 2023-03-13 20:56:17 -0700
+  
+NoMethodError (undefined method `helper_method' for ApplicationController:Class):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<top (required)>'
+app/controllers/sessions_controller.rb:1:in `<top (required)>'
+Started POST "/login" for ::1 at 2023-03-13 20:59:26 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 422 Unprocessable Entity in 71ms (Views: 0.2ms | ActiveRecord: 9.6ms | Allocations: 29556)
+
+
+Started POST "/login" for ::1 at 2023-03-13 20:59:46 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"Dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"Dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 500 Internal Server Error in 302ms (ActiveRecord: 1.2ms | Allocations: 17215)
+
+
+  
+ActionDispatch::Request::Session::DisabledSessionError (Your application has sessions disabled. To write to the session you must first configure a session store):
+  
+app/controllers/sessions_controller.rb:5:in `create'
+Started POST "/login" for ::1 at 2023-03-13 21:01:49 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"Dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"Dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 500 Internal Server Error in 292ms (ActiveRecord: 0.6ms | Allocations: 566)
+
+
+  
+ActionDispatch::Request::Session::DisabledSessionError (Your application has sessions disabled. To write to the session you must first configure a session store):
+  
+app/controllers/sessions_controller.rb:5:in `create'
+Started POST "/login" for ::1 at 2023-03-13 21:07:34 -0700
+  
+NoMethodError (undefined method `helper_method' for ApplicationController:Class):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<top (required)>'
+app/controllers/sessions_controller.rb:1:in `<top (required)>'
+Started POST "/login" for ::1 at 2023-03-13 21:10:10 -0700
+  
+NameError (uninitialized constant ApplicationController::SessionsHelper):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<top (required)>'
+app/controllers/sessions_controller.rb:1:in `<top (required)>'
+Started POST "/login" for ::1 at 2023-03-13 21:16:59 -0700
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"Dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"Dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 500 Internal Server Error in 301ms (ActiveRecord: 0.5ms | Allocations: 46097)
+
+
+  
+ActionDispatch::Request::Session::DisabledSessionError (Your application has sessions disabled. To write to the session you must first configure a session store):
+  
+app/controllers/sessions_controller.rb:5:in `create'
+Started POST "/login" for ::1 at 2023-03-13 21:17:45 -0700
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"Dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"Dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 307ms (Views: 0.6ms | ActiveRecord: 0.6ms | Allocations: 45569)
+
+
+Started POST "/login" for ::1 at 2023-03-13 21:21:02 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"Dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"Dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 422 Unprocessable Entity in 285ms (Views: 0.4ms | ActiveRecord: 0.7ms | Allocations: 568)
+
+
+Started POST "/login" for ::1 at 2023-03-13 21:21:08 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"Dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"Dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 291ms (Views: 2.9ms | ActiveRecord: 0.3ms | Allocations: 827)
+
+
+Started POST "/users" for ::1 at 2023-03-13 21:30:11 -0700
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"david", "username"=>"darealDyl36", "email"=>"Dylan@example.com", "password"=>"[FILTERED]", "user"=>{"name"=>"david", "email"=>"Dylan@example.com", "username"=>"darealDyl36"}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x00007f93352ff678>, params: {"name"=>"david", "username"=>"darealDyl36", "email"=>"Dylan@example.com", "password"=>"[FILTERED]", "controller"=>"users", "action"=>"create", "user"=>{"name"=>"david", "email"=>"Dylan@example.com", "username"=>"darealDyl36"}} }[0m
+Completed 422 Unprocessable Entity in 58ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 41011)
+
+
+Started POST "/users" for ::1 at 2023-03-13 21:31:10 -0700
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"david", "username"=>"darealDyl36", "email"=>"Dylan@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"david", "email"=>"Dylan@example.com", "username"=>"darealDyl36"}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x00007f933680d6a0>, params: {"name"=>"david", "username"=>"darealDyl36", "email"=>"Dylan@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"users", "action"=>"create", "user"=>{"name"=>"david", "email"=>"Dylan@example.com", "username"=>"darealDyl36"}} }[0m
+Completed 422 Unprocessable Entity in 9ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 2204)
+
+
+Started POST "/users" for ::1 at 2023-03-13 21:31:34 -0700
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"david", "username"=>"darealDyl", "email"=>"Dylan@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"david", "email"=>"Dylan@example.com", "username"=>"darealDyl"}}
+[31mUnpermitted parameter: :username. Context: { controller: UsersController, action: create, request: #<ActionDispatch::Request:0x00007f9343194118>, params: {"name"=>"david", "username"=>"darealDyl", "email"=>"Dylan@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "controller"=>"users", "action"=>"create", "user"=>{"name"=>"david", "email"=>"Dylan@example.com", "username"=>"darealDyl"}} }[0m
+Completed 422 Unprocessable Entity in 8ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 2204)
+
+
+Started POST "/users" for ::1 at 2023-03-13 21:32:06 -0700
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"david", "username"=>"darealDyl", "email"=>"Dylan@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"david", "email"=>"Dylan@example.com", "username"=>"darealDyl"}}
+Completed 422 Unprocessable Entity in 6ms (Views: 0.3ms | ActiveRecord: 1.1ms | Allocations: 3352)
+
+
+Started POST "/users" for ::1 at 2023-03-13 21:33:59 -0700
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"david", "username"=>"darealDyl", "email"=>"Dylan@example.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mUser Create (4.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "username", "created_at", "updated_at", "password_digest") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "david"], ["email", "Dylan@example.com"], ["username", "darealDyl"], ["created_at", "2023-03-14 04:33:59.928699"], ["updated_at", "2023-03-14 04:33:59.928699"], ["password_digest", "[FILTERED]"]]
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+Completed 201 Created in 309ms (Views: 0.5ms | ActiveRecord: 5.1ms | Allocations: 2362)
+
+
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPlaylist Load (0.7ms)[0m  [1m[34mSELECT "playlists".* FROM "playlists" WHERE "playlists"."user_id" = ? ORDER BY "playlists"."id" ASC LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPlaylist Load (0.2ms)[0m  [1m[34mSELECT "playlists".* FROM "playlists" WHERE "playlists"."user_id" = ? ORDER BY "playlists"."id" ASC LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[36mSong Load (0.9ms)[0m  [1m[34mSELECT "songs".* FROM "songs" INNER JOIN "playlist_songs" ON "songs"."id" = "playlist_songs"."song_id" WHERE "playlist_songs"."playlist_id" = ?[0m  [["playlist_id", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mLike Load (1.3ms)[0m  [1m[34mSELECT "likes".* FROM "likes" WHERE "likes"."user_id" = ?[0m  [["user_id", 1]]
