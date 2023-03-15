@@ -12,11 +12,24 @@
     align-items: center;
     width: 100%;
     margin: 0px;
+    position: relative;
+    margin-top: 20px;
 }
 
 #card-details > * {
     margin: 0px;
     padding: 0px;
+    padding-bottom: 20px;
+}
+
+#card-details > *:first-child {
+    position: absolute;
+    left: 20px;
+}
+
+#card-details > *:last-child {
+    position: absolute;
+    right: 20px;
 }
 
 #home-card-wrapper {
@@ -28,6 +41,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    box-shadow: 0px 0px 8px 1px;
 }
 
 #home-card-wrapper > img {
@@ -55,6 +69,7 @@
     align-items: center;
     padding-top: 10px;
     position: relative;
+    width: 100%;
 }
 
 #artist-info > h3 {
