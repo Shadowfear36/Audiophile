@@ -1,0 +1,50 @@
+#song-list-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+#song-wrapper {
+    display: flex;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    align-items: center;
+    position: relative;
+    height: 22px;
+}
+
+#song-wrapper > * {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+hr {
+    width: 100%;
+    margin-top: 3px;
+    margin-bottom: 0px;
+}
+
+#song-wrapper > h5 {
+    position: absolute;
+    right: 100px;
+}
+
+#song-index {
+    position: absolute;
+    left: 5px;
+}
+
+#song-list-title {
+    position: absolute;
+    left: 35px;
+}
+
+#song-list-play {
+    position: absolute;
+    right: 10px;
+}

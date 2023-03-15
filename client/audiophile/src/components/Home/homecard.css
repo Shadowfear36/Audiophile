@@ -1,0 +1,95 @@
+#home-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 10px;
+}
+
+#card-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0px;
+}
+
+#card-details > * {
+    margin: 0px;
+    padding: 0px;
+}
+
+#home-card-wrapper {
+    background-color: lightgray;
+    margin: 15px;
+    margin-top: 2px;
+    border-radius: 10px;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#home-card-wrapper > img {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+#card-info-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    margin: 0px;
+}
+
+#info-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 10px;
+    position: relative;
+}
+
+#artist-info > h3 {
+    font-weight: 900;
+    font-size: 32px;
+    padding-bottom: 12px;
+}
+
+#artist-info > h5 {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#card-social-btns {
+    position: absolute;
+    right: 15px;
+}
+
+#card-song-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 5px;
+    width: 90%;
+    align-self: center;
+}
+
+#card-song-container > h5 {
+    padding-top: 3px;
+    padding-bottom: 2px;
+    margin: 0px;
+    align-self: center;
+    font-weight: 700;
+    font-size: 18px;
+}
+

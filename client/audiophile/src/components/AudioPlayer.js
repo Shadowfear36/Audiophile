@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './audioplayer.css';
+import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs"
 
 function AudioPlayer(props) {
   //set states
@@ -59,33 +60,50 @@ function AudioPlayer(props) {
   };
 
   return (
+    <div id="audio-player-container">
+        <img id="album" src="https://place-hold.it/75"/>
+        <div id="artist-info">
+            <h3>SongName</h3>
+            <h5>Artist Name</h5>
+        </div>
     <div className="audio-player">
       <audio ref={audioRef} src={props.src} />
-      <div className="controls">
-        <button onClick={handlePlayPauseClick}>
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
-        <label>
-            Volume
-            <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={handleVolumeChange}
-            />
-        </label>
-        <input
-          type="range"
-          min="0"
-          max={duration}
-          value={currentTime}
-          onChange={handleTimeChange}
-        />
-        <label>
-            {currentTime}
-        </label>
+            <div id="volume-container">
+                <label id="volume-wrapper">
+                    Volume
+                    <input
+                    id="volume-controller"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={volume}
+                    onChange={handleVolumeChange}
+                    />
+                </label>
+            </div>
+        <div id="top-player">
+            <div id="audio-btn-container">
+                <button>{'<<'}</button>
+                <button id="audio-btn" onClick={handlePlayPauseClick}>
+                {isPlaying ? <BsFillPauseFill size={30}/> : <BsFillPlayFill size={30}/>}
+                </button>
+                <button>{'>>'}</button>
+            </div>
+        </div>
+        <div id="bottom-player">
+            <label id="time-scrub-wrapper">
+                <input
+                id="time-scrub"
+                type="range"
+                min="0"
+                max={duration}
+                value={currentTime}
+                onChange={handleTimeChange}
+                />
+                {Math.floor(currentTime)}/{Math.floor(duration)}
+            </label>
+          </div>
       </div>
     </div>
   );
