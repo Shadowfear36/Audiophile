@@ -23,3 +23,9 @@ test:
 production:
   <<: *default
   database: db/production.sqlite3
+
+# google:
+#   service: GCS
+#   project: lexical-passkey-380701
+#   credentials: <%= Rails.root.join('/gkey.json') %>
+#   bucket: audio_bucket_1_d
