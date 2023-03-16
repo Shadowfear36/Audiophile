@@ -1,19 +1,31 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from "../context/user";
 import './navbar.css';
 
-export default function 
-() {
+export default function () {
+
+    //initialize navigation
+    const navigate = useNavigate();
+
+    // initialize User Context
+    const { userState, setUserState } = useContext(UserContext);
+
+    //page state for .active button class
+    const [activeState, setActiveState] = useState({active: "home"})
+
+
   return (
     <div id="navbar-container">
         <div id="nav-top-wrapper">
             <button className="nav-btn">Create</button>
         </div>
         <div id="nav-mid-wrapper">
-            <button className="nav-btn">Home</button>
-            <button className="nav-btn">Search</button>
-            <button className="nav-btn">Music</button>
-            <button className="nav-btn">Profile</button>
-            <button className="nav-btn">Settings</button>
+            <button name="home" className="nav-btn" onClick={() => navigate('/home')}>Home</button>
+            <button name="search" className="nav-btn" onClick={() => navigate('/search')}>Search</button>
+            <button name="music" className="nav-btn" onClick={() => navigate('/music')}>Music</button>
+            <button name="profile"className="nav-btn" onClick={() => navigate(`/profile/${userState.username}`)}>Profile</button>
+            <button name="settings" className="nav-btn" onClick={() => navigate('/settings')}>Settings</button>
         </div>
         <div id="nav-btm-wrapper">
          <button className="nav-btn">Logout</button>

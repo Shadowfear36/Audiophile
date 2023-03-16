@@ -5,6 +5,8 @@ ruby "2.7.4"
 
 gem 'bcrypt'
 
+gem "google-cloud-storage"
+
 gem 'rack-cors'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.2"
