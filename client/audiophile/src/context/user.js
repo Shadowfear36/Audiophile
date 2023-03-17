@@ -9,7 +9,11 @@ function UserProvider({ children }) {
     page: '',
     name: '',
     username: '',
-    email: ''
+    email: '',
+    password_digest: '',
+    user_type: '',
+    currentSong: [],
+    queue: []
   };
 
   const [userState, setUserState] = React.useState(() => {

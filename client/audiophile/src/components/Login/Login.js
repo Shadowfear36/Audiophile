@@ -35,7 +35,11 @@ export default function Login() {
                 page: 'home',
                 name: obj.name,
                 username: obj.username,
-                email: obj.email
+                email: obj.email,
+                password_digest: obj.password_digest,
+                user_type: obj.user_type,
+                currentSong: [],
+                queue: []
               })
               navigate('/home')
         } else {
@@ -52,15 +56,7 @@ export default function Login() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(formState)
-        })
-        .then(res => {
-            if (res.ok) {
-                res.json().then(data => handleUpdate(data));
-            } else {
-                res.json().then(obj => console.log(obj.error));
-            }
-        })
-        .then(handleUpdate)
+        }).then(res => res.json()).then(data => handleUpdate(data))
     }
 
 

@@ -5,8 +5,7 @@ import AudioUploadForm from '../AudioUploadForm';
 export default function CreatePage() {
   return (
     <div>
-
-      <AudioUploadForm/>
+      
     </div>
   )
 }

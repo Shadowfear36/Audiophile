@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.4"
 
-gem 'bcrypt'
+gem 'bcrypt', '3.1.12'
 
 gem "google-cloud-storage"
 

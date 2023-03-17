@@ -13,6 +13,7 @@ class SongsController < ApplicationController
     end
   
     def show
+      
       @song = Song.find(params[:id])
   
       # Get the audio URL from the song instance
