@@ -1,0 +1,19 @@
+test:
+  service: Disk
+  root: <%= Rails.root.join("tmp/storage") %>
+
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
+
+google_dev:
+  service: GCS
+  project: lexical-passkey-380701
+  credentials: 'config/gkey.json'
+  bucket: audio_bucket_1_d
+
+google:
+  service: GCS
+  project: lexical-passkey-380701
+  credentials: 'config/gkey.json'
+  bucket: audio_bucket_1_d

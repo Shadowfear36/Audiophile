@@ -18,7 +18,7 @@ export default function () {
   return (
     <div id="navbar-container">
         <div id="nav-top-wrapper">
-            <button className="nav-btn">Create</button>
+            <button className="nav-btn" onClick={() => navigate('/create')}>Create</button>
         </div>
         <div id="nav-mid-wrapper">
             <button name="home" className="nav-btn" onClick={() => navigate('/home')}>Home</button>

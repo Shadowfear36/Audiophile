@@ -1,41 +1,38 @@
 import React, { useState } from "react";
 
 function AudioUploadForm() {
-    const [file, setFile] = useState(null);
     const [name, setName] = useState("");
-    const [format, setFormat] = useState("");
-    const [size, setSize] = useState("");
-  
-    const handleFileChange = (e) => {
-      setFile(e.target.files[0]);
-      setName(e.target.files[0].name);
-      setFormat(e.target.files[0].type);
-      setSize(e.target.files[0].size);
-    };
+    const [album, setAlbum] = useState(null);
+    const [audioData, setAudioData] = useState(null)
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("name", name);
-      formData.append("format", format);
-      formData.append("size", size);
-      try {
-        const response = await fetch("http://localhost:3000/", {
-          method: "POST",
-          body: formData,
-        });
-        console.log(response.data); // response.data will contain the link to the uploaded file
-      } catch (error) {
-        console.log(error);
-      }
+
+      const formData = new FormData()
+      formData.append('user_id', 1)
+      formData.append('name', name)
+      formData.append('audio', audioData)
+      formData.append('album_id', 1)
+
+      fetch('http://localhost:3000/songs', {
+        method: 'POST',
+        body: formData
+      }).then(res => res.json()).then(obj => console.log(obj))
     };
   
     return (
       <form onSubmit={handleSubmit}>
         <div>
+          <input onChange={(e)=> setName(e.target.value)} type="text"/>
+          <select onChange={(e) => setAlbum(e.target.value)}>
+            <option value={0}>Choose Album</option>
+            <option value={1}>Album 1</option>
+            <option value={2}>Album 2</option>
+            <option value={3}>Album 3</option>
+            <option value={4}>Album 4</option>
+          </select>
           <label htmlFor="file">Upload File:</label>
-          <input type="file" id="file" name="file" onChange={handleFileChange} />
+          <input type="file" accept="audio/*" id="file" name="file" onChange={(e) => setAudioData(e.target.files[0])} />
         </div>
         <button type="submit">Submit</button>
       </form>
