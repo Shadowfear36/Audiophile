@@ -41,6 +41,8 @@ export default function Signup() {
                 name: obj.name,
                 username: obj.username,
                 email: obj.email,
+                gender: obj.gender,
+                age: obj.age,
                 password_digest: obj.password_digest,
                 user_type: obj.user_type,
                 currentSong: [],

@@ -15706,3 +15706,27 @@ Processing by UsersController#create as */*
 Completed 201 Created in 96ms (Views: 0.3ms | ActiveRecord: 2.1ms | Allocations: 45918)
 
 
+Started POST "/login" for ::1 at 2023-03-17 16:12:29 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 94ms (Views: 2.9ms | ActiveRecord: 6.0ms | Allocations: 1062)
+
+
+Started POST "/login" for ::1 at 2023-03-17 16:34:15 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"Dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"Dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "Dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 422 Unprocessable Entity in 29ms (Views: 1.5ms | ActiveRecord: 6.7ms | Allocations: 690)
+
+
+Started POST "/login" for ::1 at 2023-03-17 16:34:20 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"dylan@example.com", "password"=>"[FILTERED]", "session"=>{"email"=>"dylan@example.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "dylan@example.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 111ms (Views: 3.2ms | ActiveRecord: 0.5ms | Allocations: 764)
+
+
