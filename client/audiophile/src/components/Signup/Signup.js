@@ -108,22 +108,28 @@ export default function Signup() {
                     <button onClick={() => setFormIndex(2)}>Next</button>
   </>
 
-  const form2 = <>
-                    <label for="age">Age</label>
-                    <input type="number" name="age" min={0} onChange={handleChange} value={formState.age} />
-                    <label for="gender">Gender</label>
-                    <select name="gender" onChange={handleChange} value={formState.gender}>
-                      <option value="M">Male</option>
-                      <option value="F">Female</option>
-                      <option value="">Prefer Not To Say</option>
-                    </select>
-                    <div>
+  const form2 = <>  
+                    <div id="form2-top">
+                      <div id="age-wrap">
+                        <label for="age">Age</label>
+                        <input id="num-inp" type="number" name="age" min={0} onChange={handleChange} value={formState.age} />
+                      </div>
+                      <div id="gen-wrap">
+                        <label for="gender">Gender</label>
+                        <select id="signup-sel" name="gender" onChange={handleChange} value={formState.gender}>
+                          <option value="M">Male</option>
+                          <option value="F">Female</option>
+                          <option value="">Prefer Not To Say</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div id="btn-cluster">
                       <button name="DJ" onClick={handleType}>DJ</button>
-                      <button name="Producer" onClick={handleType}>Producer</button>
+                      <button id="btn-mid" name="Producer" onClick={handleType}>Producer</button>
                       <button name="Artist" onClick={handleType}>Artist</button>
                     </div>
                     <br/>
-                    <div>
+                    <div id="btn-cluster">
                       <button onClick={() => setFormIndex(1)}>Back</button>
                       <button onClick={() => setFormIndex(3)}>Next</button>
                     </div>
