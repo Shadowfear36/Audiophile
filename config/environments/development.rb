@@ -1,5 +1,9 @@
 require "active_support/core_ext/integer/time"
 
+Rails.application.routes.default_url_options = {
+  host: 'http://localhost:3000'
+}
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -35,7 +39,6 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :google
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

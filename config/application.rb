@@ -30,7 +30,7 @@ module Audiophile
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    
+
     config.api_only = false
     config.session_store :cookie_store, key: 'audiophile_app_session', same_site: :lax, secure: Rails.env.production?
   end

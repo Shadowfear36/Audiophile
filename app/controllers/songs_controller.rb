@@ -5,18 +5,28 @@ class SongsController < ApplicationController
     end
   
     def create
-      ActiveRecord::Base.transaction do
         @song = Song.create!(song_params)
-        @song.audio.attach(params[:audio])
-      end
-  
-      render json: @song.as_json(methods: :audio_url), status: :created
-    rescue ActiveRecord::RecordInvalid => e 
-      render json: { errors: e.record.errors.full_messages }, status: :unprocessable
+      
+        render json: SongSerializer.new(@song).serializable_hash[:data][:attributes]
+    rescue ActiveRecord::RecordInvalid => e
+        render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
     end
   
     def show
       @song = Song.find(params[:id])
+  
+      # Get the audio URL from the song instance
+      audio_url = @song.audio_url
+  
+      # Check if the URL has expired
+      if audio_url && Time.now.utc > @song.audio.metadata["goog-resumable-expiration"].to_time
+        # Generate a new signed URL that is valid for 1 year
+        audio_url = @song.audio.service_url(expires_in: 1.year)
+  
+        # Store the new signed URL in the song instance
+        @song.update(audio: audio_url)
+      end
+  
       render json: @song.as_json(methods: :audio_url), status: :ok
     end
   
@@ -26,7 +36,7 @@ class SongsController < ApplicationController
       render json: { "Success": "Song Deleted" }, status: :deleted
     end
   
-    private 
+    private
   
     def song_params
       params.permit(:name, :album_id, :user_id, :likes, :audio)

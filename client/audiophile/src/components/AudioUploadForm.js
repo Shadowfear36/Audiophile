@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-
+import AudioPlayer from "./AudioPlayer";
 function AudioUploadForm() {
     const [name, setName] = useState("");
     const [album, setAlbum] = useState(null);
     const [audioData, setAudioData] = useState(null)
-  
+    const [songUrl, setSongUrl] = useState('')
+
     const handleSubmit = async (e) => {
       e.preventDefault();
 
@@ -17,10 +18,11 @@ function AudioUploadForm() {
       fetch('http://localhost:3000/songs', {
         method: 'POST',
         body: formData
-      }).then(res => res.json()).then(obj => console.log(obj))
+      }).then(res => res.json()).then(obj => setSongUrl(obj.audio_url))
     };
-  
+
     return (
+      <>
       <form onSubmit={handleSubmit}>
         <div>
           <input onChange={(e)=> setName(e.target.value)} type="text"/>
@@ -36,6 +38,9 @@ function AudioUploadForm() {
         </div>
         <button type="submit">Submit</button>
       </form>
+      <AudioPlayer src={songUrl}/>
+      </>
+      
     );
 }
 
