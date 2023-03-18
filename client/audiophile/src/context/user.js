@@ -10,6 +10,8 @@ function UserProvider({ children }) {
     name: '',
     username: '',
     email: '',
+    age: '',
+    gender: '',
     password_digest: '',
     user_type: '',
     currentSong: [],

@@ -1,0 +1,43 @@
+#settings-page-container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+}
+
+#settings-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#settings-container > h2 {
+    font-weight: 800;
+    font-size: 54px;
+    margin-bottom: 0px;
+    position: absolute;
+    top: 50px;
+}
+
+#settings-form {
+    width: 25%;
+}
+
+#dlt-act {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    background-color: red;
+    font-weight: 700;
+}
+
+#settings-btn {
+    margin-top: 20px;
+    width: 35%;
+    justify-self: center;
+    align-self: center;
+}
