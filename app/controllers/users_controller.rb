@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     end
 
     def create
-      puts "User params: #{:user_params.inspect}"
       @user = User.create!(user_params)
       if @user.save
         session[:user_id] = @user.id
@@ -28,6 +27,24 @@ class UsersController < ApplicationController
     def destroy
       @user.destroy
       render json: { "Success": "User And Dependents Were Deleted!"}, status: :ok
+    end
+
+    def songs
+      @user = User.find(params[:id])
+      @songs = @user.songs
+      render json: @songs, status: :ok
+    end
+
+    def albums
+      @user = User.find(params[:id])
+      @albums = @user.albums
+      render json: @albums, status: :ok
+    end
+
+    def playlists
+      @user = User.find(params[:id])
+      @playlists = @user.playlists
+      render json: @playlists, status: :ok
     end
 
     private

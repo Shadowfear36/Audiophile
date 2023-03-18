@@ -18,7 +18,7 @@ function AudioUploadForm() {
       fetch('http://localhost:3000/songs', {
         method: 'POST',
         body: formData
-      }).then(res => res.json()).then(obj => setSongUrl(obj.audio_url))
+      }).then(res => res.json()).then(obj => console.log(obj))
     };
 
     return (
@@ -38,7 +38,6 @@ function AudioUploadForm() {
         </div>
         <button type="submit">Submit</button>
       </form>
-      <AudioPlayer src={songUrl}/>
       </>
       
     );

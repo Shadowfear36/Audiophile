@@ -15,8 +15,6 @@ class SongsController < ApplicationController
     def show
       
       @song = Song.find(params[:id])
-  
-      # Get the audio URL from the song instance
       audio_url = @song.audio_url
   
       # Check if the URL has expired
