@@ -1,0 +1,29 @@
+#create-page-container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+}
+
+#create-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+}
+
+#btn-wrapper-create {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+#btn-wrapper-create > button {
+    margin: 10px;
+    width: 150px;
+    height: 45px;
+}
