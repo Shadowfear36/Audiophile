@@ -3,6 +3,7 @@ import './profile.css';
 import Navbar from '../Navbar';
 import PSongs from './PSongs';
 import { useParams } from 'react-router-dom';
+import AudioPlayer from '../AudioPlayer';
 
 export default function Profile() {
   let { username } = useParams();
@@ -43,7 +44,11 @@ export default function Profile() {
             </div>
             <div id="profile-content-container">
               <PSongs songs={songs}/>
+              <div className="audio-player-container">
+                <AudioPlayer />
+              </div>
             </div>
+
         </div>
     </div>
   )

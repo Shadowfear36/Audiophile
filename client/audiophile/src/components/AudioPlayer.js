@@ -1,13 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import './audioplayer.css';
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs"
+import { UserContext } from "../context/user";
 
-function AudioPlayer(props) {
+
+function AudioPlayer() {
+
+  // initialize User Context
+  const { userState, setUserState } = useContext(UserContext);
+
+  console.log(userState.queue)
+
+
   //set states
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(0.5);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  
   // create a reference to the Audio tag itself
   const audioRef = useRef(null);
 
@@ -34,7 +44,7 @@ function AudioPlayer(props) {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
     };
-  }, []);
+  }, [audioRef.current]);
 
   //handle volume change on range
   const handleVolumeChange = (event) => {
@@ -67,7 +77,7 @@ function AudioPlayer(props) {
             <h5>Artist Name</h5>
         </div>
     <div className="audio-player">
-      <audio ref={audioRef} src={props.src} />
+      <audio ref={audioRef} src={userState.currentSong.audio_url} />
             <div id="volume-container">
                 <label id="volume-wrapper">
                     Volume

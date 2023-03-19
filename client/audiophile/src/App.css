@@ -45,3 +45,10 @@ form > label {
   padding-left: 10px;
 }
 
+.audio-player-container {
+  width: 90%;
+  position: absolute;
+  bottom: 0px;
+
+}
+
