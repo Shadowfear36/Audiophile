@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     end
 
     def show
-      @user = User.find(params[:id])
+      @user = User.find_by username: params[:id]
       render json: @user, status: :ok
     end
 
@@ -30,19 +30,19 @@ class UsersController < ApplicationController
     end
 
     def songs
-      @user = User.find(params[:id])
+      @user = User.find_by username: params[:username]
       @songs = @user.songs
       render json: @songs, status: :ok
     end
 
     def albums
-      @user = User.find(params[:id])
+      @user = User.find_by username: params[:username]
       @albums = @user.albums
       render json: @albums, status: :ok
     end
 
     def playlists
-      @user = User.find(params[:id])
+      @user = User.find_by username: params[:username]
       @playlists = @user.playlists
       render json: @playlists, status: :ok
     end

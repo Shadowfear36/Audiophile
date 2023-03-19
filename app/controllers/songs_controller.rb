@@ -13,19 +13,7 @@ class SongsController < ApplicationController
     end
   
     def show
-      
       @song = Song.find(params[:id])
-      audio_url = @song.audio_url
-  
-      # Check if the URL has expired
-      if audio_url && Time.now.utc > @song.audio.metadata["goog-resumable-expiration"].to_time
-        # Generate a new signed URL that is valid for 1 year
-        audio_url = @song.audio.service_url(expires_in: 1.year)
-  
-        # Store the new signed URL in the song instance
-        @song.update(audio: audio_url)
-      end
-  
       render json: @song.as_json(methods: :audio_url), status: :ok
     end
   
@@ -33,6 +21,12 @@ class SongsController < ApplicationController
       @song = Song.find(params[:id])
       @song.destroy
       render json: { "Success": "Song Deleted" }, status: :deleted
+    end
+
+    def link
+      @song = Song.find(params[:id])
+      @url = @song.audio_url
+      render json: @url, status: :ok
     end
   
     private

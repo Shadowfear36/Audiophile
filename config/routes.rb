@@ -12,13 +12,15 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
 
   # user routes
-  get '/users/:id/songs', to: 'users#songs'
-  get '/users/:id/playlists', to: 'users#playlists'
-  get '/users/:id/albums', to: 'users#albums'
+  get '/users/:username/songs', to: 'users#songs'
+  get '/users/:username/playlists', to: 'users#playlists'
+  get '/users/:username/albums', to: 'users#albums'
   
   # albums routes
   get '/albums/:id/songs', to: 'albums#songs'
   get '/albums/:id/likes', to: 'albums#likes'
+
+  get '/songs/:id/link', to: 'songs#link'
 
   #playlist routes
   
