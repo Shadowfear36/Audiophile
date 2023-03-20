@@ -8,7 +8,6 @@ export default function ({ song, i}) {
     // initialize User Context
     const { userState, setUserState } = useContext(UserContext);
 
-    console.log(userState.queue);
 
     const handleClick = () => {
        setUserState({...userState, queue: [...userState.queue, song] })

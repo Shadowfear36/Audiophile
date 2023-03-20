@@ -1,20 +1,21 @@
 class SongsController < ApplicationController
+
     def index
       @songs = Song.all
-      render json: @songs.as_json(methods: :audio_url), status: :ok
+      render json: @songs, status: :ok
     end
   
     def create
         @song = Song.create!(song_params)
       
-        render json: SongSerializer.new(@song).serializable_hash[:data][:attributes]
+        render json: @song, status: :ok
     rescue ActiveRecord::RecordInvalid => e
         render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
     end
   
     def show
       @song = Song.find(params[:id])
-      render json: @song.as_json(methods: :audio_url), status: :ok
+      render json: @song, serializer: SongsSerializer, status: :ok
     end
   
     def delete
@@ -32,6 +33,6 @@ class SongsController < ApplicationController
     private
   
     def song_params
-      params.permit(:name, :album_id, :user_id, :likes, :audio)
+      params.permit(:name, :album_id, :user_id, :likes, :audio, :artist)
     end
   end

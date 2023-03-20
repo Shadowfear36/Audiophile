@@ -31,8 +31,6 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-
-
-gem "jsonapi-serializer", "~> 2.2"
+gem 'active_model_serializers'
 
 gem "byebug", "~> 11.1"

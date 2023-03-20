@@ -2,17 +2,19 @@ class PlaylistsController < ApplicationController
 
     def index
         @playlists = Playlist.all
-        render json: @playlists, status: :ok
+        render json: @playlists.as_json(methods: :songs), status: :ok
     end
 
     def show
         @playlist = Playlist.find(params[:id])
-        render json: @playlist, status: :ok
+        render json: @playlist, serializer: PlaylistsSerializer, status: :ok
     end
 
     def create
         @playlist = Playlist.create!(playlist_params)
-        render json: @playlist, status: :created
+        render json: PlaylistSerializer.new(@playlist).serializable_hash[:data][:attributes]
+    rescue ActiveRecord::RecordInvalid => e
+        render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
     end
 
     def update

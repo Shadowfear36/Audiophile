@@ -3,7 +3,6 @@ import './songlist.css';
 import SongItem from './SongItem.js';
 
 export default function SongList({songs}) {
-
     let i = 0;
 
     const renderSongs = songs.songs.map((obj) => {
@@ -12,6 +11,14 @@ export default function SongList({songs}) {
         <SongItem song={obj} i={i}/>
         )
     })
+
+    const isSongsFull = () => {
+        if (songs.length > 0) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     // console.log(songs.songs);
 

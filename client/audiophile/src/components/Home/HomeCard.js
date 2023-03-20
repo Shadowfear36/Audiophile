@@ -24,7 +24,7 @@ export default function HomeCard() {
             </div>
             <div id="card-song-container">
               <h5>Top 3</h5>
-              <SongList/>
+              {/* <SongList/> */}
             </div>
         </div>
       </div>

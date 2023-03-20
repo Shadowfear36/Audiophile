@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import './settings.css';
 import Navbar from '../Navbar';
 import { UserContext } from "../../context/user";
-
+import AudioPlayer from '../AudioPlayer';
 export default function Settings() {
 
   // initialize User Context
@@ -46,6 +46,9 @@ export default function Settings() {
           <button id="settings-btn" type="submit">Save</button>
         </form>
         <button id="dlt-act">Delete Account</button>
+      <div className="audio-player-container">
+                <AudioPlayer />
+      </div>
       </div>
     </div>
   )

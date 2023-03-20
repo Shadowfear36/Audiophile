@@ -12,6 +12,14 @@ class Song < ApplicationRecord
 
   
     def audio_url
-        Rails.application.routes.url_helpers.url_for(audio) if audio.attached?
+        if self.audio.attached?
+           return 'https://storage.googleapis.com/audio_bucket_1_d/' + self.audio.key
+        else 
+            return nil  
+        end
+    end
+
+    def artist
+        return self.user.username
     end
   end

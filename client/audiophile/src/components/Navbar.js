@@ -14,6 +14,7 @@ export default function () {
     //page state for .active button class
     const [activeState, setActiveState] = useState({active: "home"})
 
+    
 
   return (
     <div id="navbar-container">

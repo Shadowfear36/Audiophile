@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
     def show
       @user = User.find_by username: params[:id]
-      render json: @user, status: :ok
+      render json: @user, serializer: UsersSerializer, status: :ok
     end
 
     def create
@@ -27,24 +27,6 @@ class UsersController < ApplicationController
     def destroy
       @user.destroy
       render json: { "Success": "User And Dependents Were Deleted!"}, status: :ok
-    end
-
-    def songs
-      @user = User.find_by username: params[:username]
-      @songs = @user.songs
-      render json: @songs, status: :ok
-    end
-
-    def albums
-      @user = User.find_by username: params[:username]
-      @albums = @user.albums
-      render json: @albums, status: :ok
-    end
-
-    def playlists
-      @user = User.find_by username: params[:username]
-      @playlists = @user.playlists
-      render json: @playlists, status: :ok
     end
 
     private

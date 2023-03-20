@@ -9,8 +9,10 @@ export default function Home() {
     <div id="home-container">
         <Navbar/>
         <div id="home-wrapper">
-            <HomeCard/>
-        {/* <AudioPlayer src="https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3"/> */}
+            {/* <HomeCard/> */}
+            <div className="audio-player-container">
+                <AudioPlayer />
+            </div>
         </div>
     </div>
   )
