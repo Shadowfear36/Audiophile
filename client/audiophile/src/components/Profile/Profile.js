@@ -15,7 +15,8 @@ export default function Profile() {
   const [playlists, setPlaylists] = useState([]);
 
   const [pageState, setPageState] = useState(1);
-
+  
+  console.log(playlists)
   useEffect(() => {
     fetch(`http://localhost:3000/users/${username}`)
     .then(res => res.json()).then((obj)=> {

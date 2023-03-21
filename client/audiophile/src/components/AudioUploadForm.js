@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import AudioPlayer from "./AudioPlayer";
+
+
 function AudioUploadForm() {
     const [name, setName] = useState("");
     const [album, setAlbum] = useState(null);
     const [audioData, setAudioData] = useState(null)
+    const [imageData, setImageData] = useState(null)
     const [songUrl, setSongUrl] = useState('')
 
     const handleSubmit = async (e) => {
@@ -13,6 +16,7 @@ function AudioUploadForm() {
       formData.append('user_id', 1)
       formData.append('name', name)
       formData.append('audio', audioData)
+      formData.append('image', imageData)
       formData.append('album_id', 1)
 
       fetch('http://localhost:3000/songs', {
@@ -33,8 +37,10 @@ function AudioUploadForm() {
             <option value={3}>Album 3</option>
             <option value={4}>Album 4</option>
           </select>
-          <label htmlFor="file">Upload File:</label>
-          <input type="file" accept="audio/*" id="file" name="file" onChange={(e) => setAudioData(e.target.files[0])} />
+          <label htmlFor="audio">Upload Audio File:</label>
+          <input type="file" accept="audio/*" id="file" name="audio" onChange={(e) => setAudioData(e.target.files[0])} />
+          <label htmlFor="image">Uploade Cover Image:</label>
+          <input type="file" accept="image/*" id="file" name="image" onChange={(e) => setImageData(e.target.files[0])} />
         </div>
         <button type="submit">Submit</button>
       </form>

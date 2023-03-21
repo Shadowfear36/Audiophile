@@ -5,7 +5,7 @@ import SongItem from './SongItem.js';
 export default function SongList({songs}) {
     let i = 0;
 
-    const renderSongs = songs.songs.map((obj) => {
+    const renderSongs = songs.map((obj) => {
         i+=1
         return (
         <SongItem song={obj} i={i}/>

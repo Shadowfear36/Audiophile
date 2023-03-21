@@ -41,6 +41,6 @@ class AlbumsController < ApplicationController
     private
 
     def album_params
-        params.permit(:id, :user_id, :likes)
+        params.permit(:id, :user_id, :likes :image)
     end
 end

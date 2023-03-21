@@ -20,11 +20,13 @@ class UsersController < ApplicationController
     end
 
     def update
+      @user = User.find(params[:id])
       @user.update!(user_params)
-      render json: @user, status: :updated
+      render json: @user, status: :ok
     end
 
     def destroy
+      @user = User.find(params[:id])
       @user.destroy
       render json: { "Success": "User And Dependents Were Deleted!"}, status: :ok
     end
