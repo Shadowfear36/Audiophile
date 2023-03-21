@@ -2,18 +2,23 @@ import React, { useState, useEffect, useContext } from 'react'
 import './settings.css';
 import Navbar from '../Navbar';
 import { UserContext } from "../../context/user";
+import AudioPlayer from '../AudioPlayer';
+import {useNavigate } from 'react-router-dom';
 
 export default function Settings() {
 
   // initialize User Context
   const { userState, setUserState } = useContext(UserContext);
+
+  //initialize navigation
+  const navigate = useNavigate();
   
   const initialFormState = {
     name: userState.name,
     email: userState.email,
     username: userState.username,
     password: '',
-    password_confirmation: '',
+    password_confirmation: '12345678',
     age: userState.age,
     gender: userState.gender,
     user_type: userState.user_type,
@@ -27,12 +32,50 @@ export default function Settings() {
     setFormState({...formState, [e.target.name]: e.target.value});
   }
 
+  const handleDeleteAcc = (e) => {
+    e.preventDefault();
+    fetch(`http://localhost:3000/users/${userState.user_id}`, {
+      method: 'DELETE',
+      headers:{
+        'Content-Type': 'application/json'
+    }
+    }).then(res => res.json()).then((obj)=> {
+      console.log(obj);
+      setUserState({
+        isLoggedIn: false,
+        user_id: '',
+        page: '',
+        name: '',
+        username: '',
+        email: '',
+        age: '',
+        gender: '',
+        password_digest: '',
+        user_type: '',
+        currentSong: [],
+        queue: []
+      })
+      navigate('/')
+    });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch(`http://localhost:3000/users/${userState.user_id}`, {
+      method: "PATCH",
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formState)
+    }).then(res => res.json()).then(console.log)
+  }
+
   return (
     <div id="settings-page-container">
       <Navbar/>
       <div id="settings-container">
         <h2>Settings</h2>
-        <form id="settings-form">
+        <form id="settings-form" onSubmit={(e) => handleSubmit(e)}>
           <label for="name">Name</label>
           <input type="text" name="name" value={formState.name} onChange={handleChange} />
           <label for="username">Username</label>
@@ -45,7 +88,10 @@ export default function Settings() {
           <input name="password" onChange={handleChange} type="text" value={formState.password}/>
           <button id="settings-btn" type="submit">Save</button>
         </form>
-        <button id="dlt-act">Delete Account</button>
+        <button onClick={handleDeleteAcc}id="dlt-act">Delete Account</button>
+      <div className="audio-player-container">
+                <AudioPlayer />
+      </div>
       </div>
     </div>
   )

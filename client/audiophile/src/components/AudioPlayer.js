@@ -1,13 +1,52 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import './audioplayer.css';
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs"
+import { UserContext } from "../context/user";
 
-function AudioPlayer(props) {
+
+function AudioPlayer() {
+
+  // initialize User Context
+  const { userState, setUserState } = useContext(UserContext);
+
+  const [index, setIndex] = useState(0)
+
+  
+  const checkIfQueueIsEmpty = () => {
+    if (userState.queue.length === 0) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  const blankQueue = {
+      "id": 1,
+      "name": "Add A Song",
+      "user_id": 1,
+      "audio_url": null,
+      "artist": "@username",
+      "album": {
+        "id": 1,
+        "name": "First Album",
+        "user_id": 1,
+        "likes": [],
+        "created_at": "2023-03-20T15:48:48.446Z",
+        "updated_at": "2023-03-20T15:48:48.446Z"
+      }
+  }
+
+  
+  const [currentSong, setCurrentSong] = useState(checkIfQueueIsEmpty()? userState.queue[index] : blankQueue)
+
+  // console.log(currentSong2);
+
   //set states
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(0.5);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isEnded, setIsEnded] = useState();
   // create a reference to the Audio tag itself
   const audioRef = useRef(null);
 
@@ -34,7 +73,7 @@ function AudioPlayer(props) {
       audio.removeEventListener('timeupdate', handleTimeUpdate);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
     };
-  }, []);
+  }, [audioRef.current]);
 
   //handle volume change on range
   const handleVolumeChange = (event) => {
@@ -59,15 +98,42 @@ function AudioPlayer(props) {
     setIsPlaying(!isPlaying);
   };
 
+  // useEffec
+  // setIsEnded(audioRef.current.ended)
+
+  // audioRef.current.ended ? setIndex(index + 1) : console.log('playing');
+
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (index < userState.queue.length - 1) {
+      setIndex(index + 1)
+      setCurrentSong(userState.queue[index]);
+      setCurrentTime(0);
+    }else {
+      console.log("Nothing left to skip to");
+    }
+  }
+
+  const handlePrev = (e) => {
+    e.preventDefault();
+    if (index > 1) {
+      setIndex(index - 1)
+      setCurrentSong(userState.queue[index]);
+    }else {
+      console.log("Nothing left to go back to");
+    }
+  }
+
   return (
     <div id="audio-player-container">
         <img id="album" src="https://place-hold.it/75"/>
         <div id="artist-info">
-            <h3>SongName</h3>
-            <h5>Artist Name</h5>
+            <h3>{currentSong.name}</h3>
+            <h5>@Artist User</h5>
         </div>
     <div className="audio-player">
-      <audio ref={audioRef} src={props.src} />
+      <audio ref={audioRef} src={currentSong.audio_url} />
             <div id="volume-container">
                 <label id="volume-wrapper">
                     Volume
@@ -84,11 +150,11 @@ function AudioPlayer(props) {
             </div>
         <div id="top-player">
             <div id="audio-btn-container">
-                <button>{'<<'}</button>
+                <button onClick={handlePrev}>{'<<'}</button>
                 <button id="audio-btn" onClick={handlePlayPauseClick}>
                 {isPlaying ? <BsFillPauseFill size={30}/> : <BsFillPlayFill size={30}/>}
                 </button>
-                <button>{'>>'}</button>
+                <button onClick={handleNext}>{'>>'}</button>
             </div>
         </div>
         <div id="bottom-player">

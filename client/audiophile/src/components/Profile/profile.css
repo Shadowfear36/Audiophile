@@ -62,3 +62,42 @@
    height: 40px;
    font-size: 22px;
 }
+
+#psong-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y:scroll;
+}
+
+#profile-content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+    position: relative;
+}
+
+#palbum-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    overflow-y:scroll;
+}
+
+#pplaylist-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 55vh;
+    align-items: center;
+    overflow-y:scroll;
+    margin-bottom: 125px;
+}
+
