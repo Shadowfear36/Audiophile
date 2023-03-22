@@ -44,6 +44,6 @@ class PlaylistsController < ApplicationController
     private
 
     def playlist_params
-        params.permit(:id, :name, :user_id, :likes)
+        params.permit(:id, :name, :user_id, :likes, :image)
     end
 end
