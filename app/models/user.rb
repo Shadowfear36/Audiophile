@@ -11,4 +11,15 @@ class User < ApplicationRecord
     has_many :songs
     has_many :playlists
     has_many :likes
+
+    has_one_attached :image, service: :google
+
+    def image_url
+        if self.image.attached?
+            return 'https://storage.googleapis.com/audio_bucket_1_d/' + self.image.key
+        else
+            return nil
+        end
+    end
+
 end

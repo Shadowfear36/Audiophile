@@ -15,6 +15,18 @@ export default function HomeCard( {obj, isSong} ) {
       setSongs([obj])
     }
   }, []);
+  console.log(obj.image_url);
+  const checkImageUrl = () => {
+    if (obj.image_url !=+ null) {
+      console.log("true");
+      return true
+    } else {
+      return false;
+    }
+  }
+
+  const placeholderURL = "https://place-hold.it/200";
+
   return (
     <div id="home-card-container">
       <div id="card-details">
@@ -22,7 +34,7 @@ export default function HomeCard( {obj, isSong} ) {
         <h6>{obj.created_at}</h6>
       </div>
       <div id="home-card-wrapper">
-        <img src={obj.image_url}/>
+        <img src={checkImageUrl ? obj.image_url : placeholderURL}/>
         <div id="card-info-display">
             <div id="info-top">
               <div id="artist-info">

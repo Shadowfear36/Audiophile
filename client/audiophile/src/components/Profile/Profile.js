@@ -13,7 +13,7 @@ export default function Profile() {
   const [songs, setSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [playlists, setPlaylists] = useState([]);
-
+  const [image, setImage] = useState(null);
   const [pageState, setPageState] = useState(1);
   
   console.log(playlists)
@@ -24,6 +24,7 @@ export default function Profile() {
       setSongs(obj.songs)
       setPlaylists(obj.playlists)
       setAlbums(obj.albums)
+      setImage(obj.image_url)
     }
       );  
   }, [])
@@ -38,13 +39,21 @@ export default function Profile() {
     }
   }
 
+  const checkIfPfpAvailable = () => {
+    if (image !== null) {
+      return true
+    } else {
+      return false
+    }
+  }
+
 
   return (
     <div id="profile-page-container">
         <Navbar />
         <div id="profile-wrapper">
             <div id="profile-hdr">
-              <img id="pfp-profile" src="https://place-hold.it/150" />
+              <img id="pfp-profile" src={checkIfPfpAvailable ? image : "https://place-hold.it/100"} />
               <div id="name-wrapper">
                 <h2>{user.name}</h2>
                 <h4>@{user.username}</h4>
