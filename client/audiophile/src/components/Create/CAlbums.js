@@ -10,7 +10,24 @@ export default function CAlbums() {
         const { userState, setUserState } = useContext(UserContext);
     
         const [pageState, setPageState] = useState(1);
-        
+        const [albumName, setAlbumName] = useState(null);
+        const [imageData, setImageData] = useState(null);
+
+        const [albumId, setAlbumId] = useState(null);
+
+        const uploadAlbum = async (e) => {
+          e.preventDefault();
+    
+          const formData = new FormData()
+          formData.append('user_id', userState.user_id)
+          formData.append("name", albumName)
+          formData.append("image", imageData)
+    
+          fetch('http://localhost:3000/albums', {
+            method: 'POST',
+            body: formData
+          }).then(res => res.json()).then(obj => console.log(obj))
+        };
 
   return (
     <div id="CSongs-container">
@@ -19,10 +36,10 @@ export default function CAlbums() {
        </div>
        <div>
             <label for="albumname">Album Name</label>
-            <input type="text" name="albumname" />
+            <input type="text" name="albumname" onChange={(e) => setAlbumName(e.target.value)} />
             <label for="image">Album Image</label>
-            <input type="file" name="image"/>
-
+            <input type="file" name="image" onChange={(e) => setImageData(e.target.files[0])}/>
+               <button onClick={uploadAlbum}>Save Album</button>
             <div>
                 <AudioUploadForm />
                 <SongList songs={[]}/>

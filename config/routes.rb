@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   get '/albums/:id/likes', to: 'albums#likes'
 
   get '/songs/:id/link', to: 'songs#link'
-
+  get '/songs/search/:search', to: 'songs#song_search'
   #playlist routes
+
+  get '/users/:id/albums', to: 'users#albums'
   
   # Defines the root path route ("/")
   # root "articles#index"

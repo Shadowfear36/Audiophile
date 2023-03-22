@@ -61,8 +61,8 @@ export default function Signup() {
       headers:{
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({"user":
-        formState})
+      body: JSON.stringify(
+        formState)
     }).then(res => res.json())
     .then(obj => handleUpdate(obj))
   }

@@ -5,9 +5,10 @@ class UsersController < ApplicationController
     end
 
     def show
-      @user = User.find_by username: params[:id]
+      @user = User.find_by(username: params[:id])
       render json: @user, serializer: UsersSerializer, status: :ok
     end
+
 
     def create
       @user = User.create!(user_params)
@@ -29,6 +30,12 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @user.destroy
       render json: { "Success": "User And Dependents Were Deleted!"}, status: :ok
+    end
+
+    def albums
+      @user = User.find(params[:id])
+      @albums = @user.albums
+      render json: @albums, status: :ok
     end
 
     private

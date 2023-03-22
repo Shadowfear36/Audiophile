@@ -29,6 +29,11 @@ class SongsController < ApplicationController
       @url = @song.audio_url
       render json: @url, status: :ok
     end
+
+    # def song_search
+    #   @songs = Songs.find_by_fuzzy_name(params[:search], :limit => 5)
+    #   render json: @songs, status: :ok
+    # end
   
     private
   
