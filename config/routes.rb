@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   get '/users/:id/albums', to: 'users#albums'
   
+  get '/search/:term', to: 'search#results'
+  get 'search', to: 'search#results'
   # Defines the root path route ("/")
   # root "articles#index"
 end

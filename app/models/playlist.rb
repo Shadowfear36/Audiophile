@@ -9,10 +9,14 @@ class Playlist < ApplicationRecord
     has_many :likes
     has_many :songs, through: :playlist_songs
 
-    # def songs
-    #     @songs = self.playlist_songs.map do |playlistsong|
-    #         playlistsong.song.as_json({methods: :audio_url})
-    #     end
-    # end
+    has_one_attached :image
+
+    def image_url
+        if self.image.attached?
+            return 'https://storage.googleapis.com/audio_bucket_1_d/' + self.image.key
+        else
+            return nil
+        end
+    end
 
 end
