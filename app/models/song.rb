@@ -5,9 +5,10 @@ class Song < ApplicationRecord
     belongs_to :album
     
     has_many :playlist_songs
-    has_many :comments
-    has_many :likes
-    
+
+    has_many :poly_comments, as: :commentable
+    has_many :poly_likes, as: :likeable
+
     has_one_attached :audio, service: :google
     has_one_attached :image, service: :google
 
@@ -30,5 +31,9 @@ class Song < ApplicationRecord
 
     def artist
         return self.user.username
+    end
+
+    def likes
+        return self.poly_likes.length
     end
   end

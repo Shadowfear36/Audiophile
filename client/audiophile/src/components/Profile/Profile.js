@@ -16,7 +16,7 @@ export default function Profile() {
   const [image, setImage] = useState(null);
   const [pageState, setPageState] = useState(1);
   
-  console.log(playlists)
+
   useEffect(() => {
     fetch(`http://localhost:3000/users/${username}`)
     .then(res => res.json()).then((obj)=> {
@@ -28,6 +28,8 @@ export default function Profile() {
     }
       );  
   }, [])
+
+  console.log(user);
 
   const renderPage = () => {
     if (pageState === 1) {

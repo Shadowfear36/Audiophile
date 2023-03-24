@@ -20,6 +20,7 @@
 }
 
 #user-card {
+    margin-top: 25px;
     padding: 5px;
     height: 75px;
     display: flex;
@@ -51,16 +52,17 @@
     border-radius: 10px;
 }
 
-#album-card {
+#album-card-s {
     height: 75px;
     background-color: lightgray;
     border-radius:10px;
     display: flex;
     flex-direction: row;
     padding: 5px;
+    margin-bottom: 5px;
 }
 
-#album-card > img {
+#album-card-s > img {
     height: 75px;
     width: 75px;
     border-radius: 10px;

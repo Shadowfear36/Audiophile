@@ -7,10 +7,12 @@ class User < ApplicationRecord
 
 
     has_many :albums
-    has_many :comments
     has_many :songs
     has_many :playlists
-    has_many :likes
+
+    has_many :poly_comments
+    has_many :poly_likes
+    
 
     has_one_attached :image, service: :google
 

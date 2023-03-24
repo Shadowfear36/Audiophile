@@ -48,3 +48,8 @@ hr {
     position: absolute;
     right: 10px;
 }
+
+#song-list-like {
+    position: absolute;
+    right: 50px;
+}

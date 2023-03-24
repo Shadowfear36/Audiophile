@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_17_211700) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_185155) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -42,25 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_211700) do
   create_table "albums", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
-    t.integer "likes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.string "text"
-    t.integer "user_id"
-    t.integer "album_id"
-    t.integer "song_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "likes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "song_id"
-    t.integer "album_id"
-    t.integer "playlist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -75,16 +56,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_17_211700) do
   create_table "playlists", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
-    t.integer "likes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "poly_comments", force: :cascade do |t|
+    t.text "content"
+    t.string "commentable_type", null: false
+    t.integer "commentable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_poly_comments_on_commentable"
+  end
+
+  create_table "poly_likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "likeable_type", null: false
+    t.integer "likeable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["likeable_type", "likeable_id"], name: "index_poly_likes_on_likeable"
   end
 
   create_table "songs", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
     t.integer "album_id"
-    t.integer "likes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

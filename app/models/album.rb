@@ -3,8 +3,9 @@ class Album < ApplicationRecord
     
     has_one :user
     has_many :songs
-    has_many :comments
-    has_many :likes
+
+    has_many :poly_comments, as: :commentable
+    has_many :poly_likes, as: :likeable
 
     has_one_attached :image, service: :google
 
@@ -19,4 +20,9 @@ class Album < ApplicationRecord
             return nil
         end
     end
+
+    def likes
+        return self.poly_likes.length
+    end
+    
 end

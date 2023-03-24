@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import './search.css';
 import Navbar from '../Navbar.js';
 import AudioPlayer from '../AudioPlayer';
+import { useNavigate } from 'react-router-dom';
 
 export default function Search() {
+
+const navigate = useNavigate();
 
 const [searchTerm, setSearchTerm] = useState('');
 const [users, setUsers] = useState([]);
@@ -23,21 +26,23 @@ useEffect(() => {
 
 const renderUsers = users.map(user => {
   let url = user.image_url
-  return <div id="user-card">
+  return <div id="user-card" onClick={()=> navigate(`/profile/${user.username}`)}>
      <img src={url}/>
     <h4>{user.username}</h4>
   </div>
 });
 
 const renderSongs = songs.map(song => {
-  return <div id="song-card">
+  console.log(song);
+  return <div id="song-card" onClick={()=> navigate(`/song/${song.id}`)}>
     <img src={song.image_url}/>
     <h4>{song.name}</h4>
+    {/* <h6>{song.artist}</h6> */}
   </div>
 });
 
 const renderAlbums = albums.map(album => {
-  return <div id="album-card">
+  return <div id="album-card-s" onClick={()=> navigate(`/album/${album.id}`)}>
     <img src={album.image_url}/>
     <h4>{album.name}</h4>
   </div>
@@ -45,7 +50,7 @@ const renderAlbums = albums.map(album => {
 
 const renderPlaylists = playlists.map(playlist => {
   console.log(playlist)
-  return <div id="album-card">
+  return <div id="album-card-s" onClick={()=> navigate(`/playlist/${playlist.id}`)}>
     <img src={playlist.image_url}/>
     <h4>{playlist.name}</h4>
   </div>

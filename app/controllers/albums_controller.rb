@@ -7,7 +7,7 @@ class AlbumsController < ApplicationController
 
     def show
         @album = Album.find(params[:id])
-        render json: @album, status: :ok
+        render json: @album, serializer: AlbumsSerializer, status: :ok
     end
 
     def create
@@ -30,12 +30,6 @@ class AlbumsController < ApplicationController
         @album = Album.find(params[:id])
         @songs = @album.songs
         render json: @songs, status: :ok
-    end
-
-    def likes
-        @album = Album.find(params[:id])
-        @likes = Album.likes.length
-        render json: @likes, status: :ok
     end
 
     private
