@@ -26,4 +26,8 @@ class Playlist < ApplicationRecord
         return self.poly_likes.length
     end
 
+    def comments
+        return self.poly_comments
+    end
+
 end
