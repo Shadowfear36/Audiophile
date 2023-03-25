@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import SongCard from '../SongCard';
 import AudioPlayer from '../AudioPlayer';
 import { UserContext } from '../../context/user';
+import Navbar from '../Navbar';
 
 export default function SongPage() {
   let {id} = useParams();
@@ -41,26 +42,31 @@ export default function SongPage() {
 
   const renderComments = comments.map((comment) => {
     return <div id="commentCard">
-      <img src={comment.pfp_url}/>
+      <img onClick={() => navigate(`/profile/${comment.username}`)} src={comment.pfp_url}/>
       <div>
-        <h4>{comment.username}</h4>
+        <h4 onClick={() => navigate(`/profile/${comment.username}`)}>{comment.username}</h4>
         <p>{comment.content}</p>
       </div>
     </div>
   })
   return (
     <div id="song-page-container">
-      <SongCard song={song}/>
-      <div id="comment-container">
-        <div>
-          <h4>Add A Comment</h4>
-          <input type="text" onChange={(e) => setUserComment(e.target.value)}/>
-          <button onClick={handleCommentSubmit}>Submit</button>
+      <Navbar />
+      <div id="song-page-wrapper">
+        <SongCard song={song}/>
+            <h4>Add A Comment</h4>
+          <div id="add-comment">
+            <input type="text" onChange={(e) => setUserComment(e.target.value)}/>
+            <button onClick={handleCommentSubmit}>Submit</button>
+          </div>
+          <h4>Comments</h4>
+        <div id="comment-container">
+          {renderComments}
         </div>
-        <h4>Comments</h4>
-        {renderComments}
+        <div className="audio-player-container">
+          <AudioPlayer />
+        </div>
       </div>
-      <AudioPlayer />
     </div>
   )
 }

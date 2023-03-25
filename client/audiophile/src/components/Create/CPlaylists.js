@@ -34,12 +34,13 @@ export default function CPlaylists() {
        <div id="Songcard-wrapper">
             <GroupCard name="Playlist Name" image="https://place-hold.it/200" songs={[]}/>
        </div>
-       <div>
+       <div id="upload_container">
             <label for="playlistname">Playlist Name</label>
-            <input type="text" name="playlistname" onChange={(e) => setPlaylistName(e.target.value)} />
-            <label for="image">Playlist Image</label>
+            <input type="text" className="file" name="playlistname" onChange={(e) => setPlaylistName(e.target.value)} />
+            <label className="file" for="image">Playlist Image
             <input type="file" name="image" onChange={(e) => setImageData(e.target.files[0])}/>
-               <button onClick={uploadPlaylist}>Save Playlist</button>
+            </label>
+               <button id="xtra-btn" onClick={uploadPlaylist}>Save Playlist</button>
             <div>
             </div>
        </div>

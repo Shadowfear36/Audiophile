@@ -128,7 +128,7 @@ function AudioPlayer() {
   return (
     <div id="audio-player-container">
         <img id="album" src="https://place-hold.it/75"/>
-        <div id="artist-info">
+        <div id="artist-info2">
             <h3>{currentSong.name}</h3>
             <h5>@{currentSong.artist}</h5>
         </div>

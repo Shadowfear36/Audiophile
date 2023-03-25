@@ -114,6 +114,28 @@ audio {
     align-items: flex-start;
 }
 
+#artist-info2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 20%;
+}
+#artist-info2 > * {
+    height: 10px;
+    margin:5px;
+    font-weight: 900;
+}
+
+#artist-info2 > *:first-child {
+    font-size: 22px;
+}
+
+#artist-info2 > *:last-child {
+    margin-top: 5px;
+    font-size: 15px;
+}
+
 #artist-info > * {
     height: 10px;
     margin:5px;

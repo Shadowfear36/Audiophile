@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './albumpage.css';
 import SongList from '../SongList';
 import { UserContext } from '../../context/user';
-
+import Navbar from '../Navbar';
+import AudioPlayer from '../AudioPlayer';
 export default function AlbumPage() {
   
   let { id } = useParams();
@@ -49,40 +50,75 @@ export default function AlbumPage() {
     </div>
   })
 
+  const handleLike = () => {
+    fetch(`http://localhost:3000/poly_likes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        likeable_type: "Album",
+        likeable_id: album.id,
+        user_id: userState.user_id
+      })
+    }).then(res => res.json()).then(console.log)
+  }
+
   return (
     <div id="album-page-container">
-<div id="home-card-container">
-      <div id="card-details">
-        <h6>@{album.artist}</h6>
-        <h6>{album.created_at}</h6>
-      </div>
-      <div id="home-card-wrapper">
-        <img src={album.image_url} onClick={() => navigate(`/album/${album.id}`)}/>
-        <div id="card-info-display">
-            <div id="info-top">
-              <div id="artist-info">
-                <h3 onClick={() => navigate(`/album/${album.id}`)}>{album.name}</h3>
-                <h5 onClick={() => navigate(`/profile/${album.artist}`)}>{album.artist}</h5>
-              </div>
-              <div id="card-social-btns">
-                <button onClick={() => navigate(`/album/${album.id}`)}>Comments</button>
-                <button>Likes: {album.likes}</button>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
+      <Navbar />
+      <div id="album-page-wrapper">
+          <div id="home-card-container">
 
-    <SongList songs={songs} full={true}/>
-    <div>
-          <h4>Add A Comment</h4>
-          <input type="text" onChange={(e) => setUserComment(e.target.value)}/>
-          <button onClick={handleCommentSubmit}>Submit</button>
+            <div id="card-details">
+              <h6>@{album.artist}</h6>
+              <h6>{album.created_at}</h6>
+            </div>
+
+            <div id="home-card-wrapper">
+              <img src={album.image_url} onClick={() => navigate(`/album/${album.id}`)}/>
+              
+              <div id="card-info-display">
+                  <div id="info-top">
+                    <div id="artist-info">
+                      <h3 onClick={() => navigate(`/album/${album.id}`)}>{album.name}</h3>
+                      <h5 onClick={() => navigate(`/profile/${album.artist}`)}>{album.artist}</h5>
+                    </div>
+                    <div id="card-social-btns">
+                      <button onClick={handleLike}>{'<3'}</button>
+                      <button onClick={() => navigate(`/album/${album.id}`)}>Comments</button>
+                      <button>Likes: {album.likes}</button>
+                    </div>
+                  </div>
+              </div>
+
+          </div>
         </div>
-    <div>
-      <p>Comments</p>
-      {renderComments}
-    </div>
+        <div id="content_wrapper">
+
+        <div id="left-container">
+          <SongList songs={songs} full={true}/>
+        </div>
+
+        <div id="right-container">
+
+          <div id="add-comment">
+            <h4>Add A Comment</h4>
+            <input type="text" onChange={(e) => setUserComment(e.target.value)}/>
+            <button onClick={handleCommentSubmit}>Submit</button>
+          </div>
+
+            <p>Comments</p>
+          <div id="comment-container">
+              {renderComments}
+          </div>
+
+        </div>
+
+        </div>
+        
+          <div className="audio-player-container">
+            <AudioPlayer />
+          </div>
+      </div>
     </div>
   )
 }

@@ -14,3 +14,40 @@
     height: 100%;
     position: relative;
 }
+
+#home-song {
+    background-color: lightgray;
+    text-align: center;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+#home-song > img {
+    height: 100px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    
+}
+
+#home-song > p {
+    margin-top: 0px;
+    padding: 5px;
+}
+
+#tren-songs {
+    display: flex;
+    flex-direction: row;
+}
+
+#home-wrapper > h2 {
+    font-size: 32px;
+    font-weight: 900;
+}
+
+#home-wrapper > h4 {
+    font-weight: 900;
+    font-size: 20px;
+}
+#x {
+    color: red;
+}

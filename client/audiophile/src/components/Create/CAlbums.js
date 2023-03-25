@@ -34,12 +34,13 @@ export default function CAlbums() {
        <div id="Songcard-wrapper">
             <GroupCard name="Album 1Name" image="https://place-hold.it/200" songs={[]}/>
        </div>
-       <div>
+       <div id="upload_container">
             <label for="albumname">Album Name</label>
             <input type="text" name="albumname" onChange={(e) => setAlbumName(e.target.value)} />
-            <label for="image">Album Image</label>
+            <label for="image" className="file">Album Image
             <input type="file" name="image" onChange={(e) => setImageData(e.target.files[0])}/>
-               <button onClick={uploadAlbum}>Save Album</button>
+            </label> 
+               <button id="xtra-btn" onClick={uploadAlbum}>Save Album</button>
        </div>
     </div>
   )

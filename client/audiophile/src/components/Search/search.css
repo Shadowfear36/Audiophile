@@ -28,6 +28,7 @@
     align-items: center;
     background-color: lightgray;
     border-radius:10px;
+    margin: 5px;
 }
 
 #user-card > img {
@@ -59,7 +60,7 @@
     display: flex;
     flex-direction: row;
     padding: 5px;
-    margin-bottom: 5px;
+    margin: 5px;
 }
 
 #album-card-s > img {
@@ -72,6 +73,11 @@
 
 section {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+}
 
+#render-container {
+    display: flex;
+    flex-direction: row;
 }

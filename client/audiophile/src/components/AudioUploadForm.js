@@ -41,17 +41,20 @@ function AudioUploadForm() {
 
     return (
       <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input onChange={(e)=> setName(e.target.value)} type="text"/>
+      <form onSubmit={handleSubmit} id="audio_upload">
+        <div id="upload_container">
+          <label for="name">Song Name</label>
+          <input onChange={(e)=> setName(e.target.value)} type="text" id="name"/>
           <select onChange={(e) => setAlbum(e.target.value)}>
             <option value={""}>Choose Album</option>
             {renderAlbumList}
           </select>
-          <label htmlFor="audio">Upload Audio File:</label>
+          <label htmlFor="audio" class="file">Upload Audio File:
           <input type="file" accept="audio/*" id="file" name="audio" onChange={(e) => setAudioData(e.target.files[0])} />
-          <label htmlFor="image">Uploade Cover Image:</label>
+          </label>
+          <label htmlFor="image" class="file">Upload Cover Image:
           <input type="file" accept="image/*" id="file" name="image" onChange={(e) => setImageData(e.target.files[0])} />
+          </label>
         </div>
         <button type="submit">Submit</button>
       </form>

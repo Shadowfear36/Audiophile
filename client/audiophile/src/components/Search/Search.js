@@ -64,19 +64,27 @@ const renderPlaylists = playlists.map(playlist => {
           <input id="search-bar-input" placeholder="Find Users, Songs, Playlists, & Albums" onChange={(e) => setSearchTerm(e.target.value)}/>
           <section>
             <h4>Users</h4>
-            {renderUsers}
+            <div id="render-container">
+              {renderUsers}
+            </div>
           </section>
           <section>
             <h4>Songs</h4>
-            {renderSongs}
+            <div id="render-container">
+              {renderSongs}
+            </div>
           </section>
           <section>
             <h4>Albums</h4>
-            {renderAlbums}
+            <div id="render-container">
+              {renderAlbums}
+            </div>
           </section>
           <section>
             <h4>Playlists</h4>
-            {renderPlaylists}
+            <div id="render-container">
+              {renderPlaylists}
+            </div>
           </section>
           <div className="audio-player-container">
                 <AudioPlayer />

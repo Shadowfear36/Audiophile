@@ -21,7 +21,12 @@ export default function Music() {
     <div id="music-page-container">
       <Navbar/>
       <div id="music-page-wrapper">
-          <SongList songs={songs} full={true}/>
+        <h2>Liked Songs</h2>
+        <div id="song-list-cont">
+          <div id="song-list-wrapper">
+            <SongList songs={songs} full={true}/>
+          </div>
+        </div>
         <div className="audio-player-container">
                 <AudioPlayer />
         </div>

@@ -11,7 +11,7 @@ class PlaylistSongsController < ApplicationController
 
     def create
         @playlist_song = PlaylistSong.create!(playlist_song_params)
-        render json: PlaylistSongSerializer.new(@playlist_song).serializable_hash[:data][:attributes]
+        render json: @playlist_song, status: :ok
     rescue ActiveRecord::RecordInvalid => e
         render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
     end

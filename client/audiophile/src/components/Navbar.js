@@ -14,7 +14,15 @@ export default function () {
     //page state for .active button class
     const [activeState, setActiveState] = useState({active: "home"})
 
-    
+    const handleLogout = () => {
+      fetch('http://localhost:3000/logout', {
+        method: 'POST',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({user_id: userState.user_id})
+      }).then(res => res.json()).then(console.log)
+    }
 
   return (
     <div id="navbar-container">
@@ -29,7 +37,7 @@ export default function () {
             <button name="settings" className="nav-btn" onClick={() => navigate('/settings')}>Settings</button>
         </div>
         <div id="nav-btm-wrapper">
-         <button className="nav-btn">Logout</button>
+         <button onClick={handleLogout} className="nav-btn">Logout</button>
         </div>
     </div>
   )

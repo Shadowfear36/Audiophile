@@ -16,6 +16,7 @@ export default function ({ song, i}) {
 
     const [playlists, setPlaylists] = useState([]);
 
+    const [playlistId, setPlaylistId] = useState(null);
     const handleClick = () => {
        setUserState({...userState, queue: [...userState.queue, song] })
     }
@@ -41,6 +42,19 @@ export default function ({ song, i}) {
       setShowPlaylists(true);
     }
 
+    const submitAddToPlaylist = () => {
+      fetch(`http://localhost:3000/playlist_songs`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          playlist_id: playlistId,
+          song_id: song.id
+        })
+      }).then(res => res.json()).then(setShowPlaylists(false))
+    }
+
+
+
     const renderOptions = playlists.map((playlist) => {
       return <option value={playlist.id}>{playlist.name}</option>
     })
@@ -48,12 +62,15 @@ export default function ({ song, i}) {
     const renderPlaylists = () => {
       return showPlaylists ? <div id="playlist-modal">
         <div>
+          <div id="x" onClick={() => setShowPlaylists(false)}>
+            x
+          </div>
         <h2> Song: {song.name}</h2>
-        <select>
+        <select onChange={(e) => setPlaylistId(e.target.value)}>
           <option>Select A Playlist</option>
           {renderOptions}
         </select>
-        <button>Add To Playlist</button>
+        <button onClick={submitAddToPlaylist}>Add To Playlist</button>
       </div>
       </div> : null
     }

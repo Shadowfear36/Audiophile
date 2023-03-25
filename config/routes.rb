@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   post '/login', to: 'sessions#create'
+  post '/logout', to: 'sessions#destroy'
 
   post '/poly_comments', to: 'poly_comments#create'
   post '/poly_likes', to: 'poly_likes#create'
