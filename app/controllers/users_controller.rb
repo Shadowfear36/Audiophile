@@ -38,6 +38,12 @@ class UsersController < ApplicationController
       render json: @albums, status: :ok
     end
 
+    def playlists
+      @user = User.find(params[:id])
+      @playlists = @user.playlists
+      render json: @playlists, status: :ok
+    end
+
     def liked_songs
       @user = User.find_by_username(params[:id])
       @songs = @user.songs_liked

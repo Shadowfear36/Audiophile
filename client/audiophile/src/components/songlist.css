@@ -53,3 +53,29 @@ hr {
     position: absolute;
     right: 50px;
 }
+
+#song-list-add {
+    position: absolute;
+    right: 100px;
+}
+
+#playlist-modal {
+    width: 500px;
+    z-index: 25;
+    position: fixed;
+    top: 40%;
+    bottom: 60%;
+    left: 50%;
+    right: 50%;
+    background-color: lightgray;
+}
+
+#playlist-modal > select {
+    width: 150px;
+}
+
+#playlist-modal > div {
+    background-color: lightgray;
+    padding: 5px;
+    border-radius: 10px;
+}
