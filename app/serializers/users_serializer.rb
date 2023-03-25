@@ -1,5 +1,5 @@
 class UsersSerializer < ActiveModel::Serializer
-  attributes :id, :name, :username, :gender, :age, :user_type, :image_url, :songs, :playlists, :albums
+  attributes :id, :name, :username, :gender, :age, :user_type, :image_url, :songs, :playlists, :albums, :songs_liked
 
   def songs
     ActiveModel::SerializableResource.new(object.songs,  each_serializer: Songs2Serializer) 

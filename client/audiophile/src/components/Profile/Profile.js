@@ -25,6 +25,7 @@ export default function Profile() {
       setPlaylists(obj.playlists)
       setAlbums(obj.albums)
       setImage(obj.image_url)
+      console.log(obj)
     }
       );  
   }, [])

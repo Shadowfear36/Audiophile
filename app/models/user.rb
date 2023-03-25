@@ -12,6 +12,11 @@ class User < ApplicationRecord
 
     has_many :poly_comments
     has_many :poly_likes
+
+    has_many :liked_songs, through: :poly_likes, source: :likeable, source_type: 'Song'
+    has_many :liked_albums, through: :poly_likes, source: :likeable, source_type: 'Album'
+    has_many :liked_playlists, through: :poly_likes, source: :likeable, source_type: 'Playlist'
+
     
 
     has_one_attached :image, service: :google
@@ -22,6 +27,10 @@ class User < ApplicationRecord
         else
             return nil
         end
+    end
+
+    def songs_liked
+        return self.liked_songs
     end
 
 end

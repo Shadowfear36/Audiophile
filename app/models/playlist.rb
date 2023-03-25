@@ -2,8 +2,6 @@ class Playlist < ApplicationRecord
     validates_presence_of :name
 
     belongs_to :user
-    
-    has_many :songs
 
     has_many :playlist_songs
 
@@ -28,6 +26,10 @@ class Playlist < ApplicationRecord
 
     def comments
         return self.poly_comments
+    end
+
+    def artist
+        return self.user.username
     end
 
 end

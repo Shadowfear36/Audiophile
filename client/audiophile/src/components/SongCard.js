@@ -4,7 +4,6 @@ import './Home/homecard.css';
 import SongList from './SongList';
 export default function SongCard({song}) {
     const navigate = useNavigate();
-    console.log(song);
   return (
     <div id="home-card-container">
     <div id="card-details">
@@ -21,7 +20,7 @@ export default function SongCard({song}) {
             </div>
             <div id="card-social-btns">
               <button>Comments</button>
-              <button>Likes</button>
+              <button>Likes: {song.likes}</button>
             </div>
           </div>
           <div id="card-song-container">

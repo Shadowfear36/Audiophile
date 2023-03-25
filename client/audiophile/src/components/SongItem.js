@@ -18,7 +18,15 @@ export default function ({ song, i}) {
     }
 
     const handleLike = () => {
-      fetch()
+      fetch(`http://localhost:3000/poly_likes`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          likeable_type: "Song",
+          likeable_id: song.id,
+          user_id: userState.user_id
+        })
+      }).then(res => res.json()).then(console.log)
     }
 
   return (
@@ -27,7 +35,7 @@ export default function ({ song, i}) {
             <h4 id="song-index">{i}</h4>
             <h4 onClick={() => navigate(`/song/${song.id}`)} id="song-list-title">{song.name}</h4>
             <div id="song-list-like" onClick={handleLike}>
-              <p>{"<3"}</p>
+              <p onClick={handleLike}>{"<3"}</p>
             </div>
             <div id="song-list-play" onClick={handleClick}>
                 <BsFillPlayFill size={25}/>

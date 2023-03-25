@@ -7,6 +7,7 @@ class TrendingController < ApplicationController
     .group("albums.id")
     .order("likes DESC, comments DESC")
     .limit(10)
+    .as_json(only: [:id, :name], methods: [:likes, :comments, :image_url])
 
     @songs = Song.select("songs.*, COUNT(poly_likes.id) AS likes, COUNT(poly_comments.id) AS comments")
     .joins("LEFT JOIN poly_likes ON poly_likes.likeable_id = songs.id AND poly_likes.likeable_type = 'Song'")
@@ -14,6 +15,7 @@ class TrendingController < ApplicationController
     .group("songs.id")
     .order("likes DESC, comments DESC")
     .limit(10)
+    .as_json(only: [:id, :name], methods: [:likes, :comments, :image_url, :artist, :audio_url])
 
     @playlists = Playlist.select("playlists.*, COUNT(poly_likes.id) AS likes, COUNT(poly_comments.id) AS comments")
     .joins("LEFT JOIN poly_likes ON poly_likes.likeable_id = playlists.id AND poly_likes.likeable_type = 'Playlist'")
@@ -21,6 +23,8 @@ class TrendingController < ApplicationController
     .group("playlists.id")
     .order("likes DESC, comments DESC")
     .limit(10)
+    .as_json(only: [:id, :name], methods: [:likes, :comments, :image_url, :artist])
+
 
      render json: {albums: @albums, songs: @songs, playlists: @playlists}, status: :ok
     end

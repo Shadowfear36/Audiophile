@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   #playlist routes
 
   get '/users/:id/albums', to: 'users#albums'
+  get '/users/:id/likes', to: 'users#liked_songs'
   
 
   get '/search/:term', to: 'search#results'

@@ -22,7 +22,6 @@ export default function AlbumItem(album) {
 
   const checkImageUrl = () => {
     if (album.album.image_url != null) {
-      console.log("true");
       return true
     } else {
       return false;
@@ -46,8 +45,8 @@ export default function AlbumItem(album) {
                 <h5 onClick={() => navigate(`/profile/${album.album.artist}`)}>{album.album.artist}</h5>
               </div>
               <div id="card-social-btns">
-                <button>Comments</button>
-                <button>Likes</button>
+                <button onClick={() => navigate(`/album/${album.album.id}`)}>Comments</button>
+                <button>Likes: {album.album.likes}</button>
               </div>
             </div>
             <div id="card-song-container">

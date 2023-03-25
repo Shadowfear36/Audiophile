@@ -50,8 +50,8 @@ export default function HomeCard( {obj, isSong} ) {
                 <h5 onClick={() => navigate(`/profile/${obj.artist}`)}>{obj.artist}</h5>
               </div>
               <div id="card-social-btns">
-                <button>Comments</button>
-                <button>Likes</button>
+                <button onClick={() => navigate(`/song/${obj.id}`)}>Comments</button>
+                <button>Likes: {obj.likes}</button>
               </div>
             </div>
             <div id="card-song-container">

@@ -40,10 +40,6 @@ export default function CAlbums() {
             <label for="image">Album Image</label>
             <input type="file" name="image" onChange={(e) => setImageData(e.target.files[0])}/>
                <button onClick={uploadAlbum}>Save Album</button>
-            <div>
-                <AudioUploadForm />
-                <SongList songs={[]}/>
-            </div>
        </div>
     </div>
   )
