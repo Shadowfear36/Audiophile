@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     def liked_songs
       @user = User.find_by_username(params[:id])
       @songs = @user.songs_liked
-      render json: @songs, status: :ok
+      render json: @songs, each_serializer: SongsSerializer, status: :ok
     end
 
     private

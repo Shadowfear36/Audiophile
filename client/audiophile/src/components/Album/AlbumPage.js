@@ -5,6 +5,7 @@ import SongList from '../SongList';
 import { UserContext } from '../../context/user';
 import Navbar from '../Navbar';
 import AudioPlayer from '../AudioPlayer';
+import { BsFillHeartFill } from "react-icons/bs";
 export default function AlbumPage() {
   
   let { id } = useParams();
@@ -41,6 +42,7 @@ export default function AlbumPage() {
   }
 
   const renderComments = comments.map((comment) => {
+    console.log(comment);
     return <div id="commentCard">
       <img src={comment.pfp_url}/>
       <div>
@@ -83,7 +85,7 @@ export default function AlbumPage() {
                       <h5 onClick={() => navigate(`/profile/${album.artist}`)}>{album.artist}</h5>
                     </div>
                     <div id="card-social-btns">
-                      <button onClick={handleLike}>{'<3'}</button>
+                      <button onClick={handleLike}><BsFillHeartFill/></button>
                       <button onClick={() => navigate(`/album/${album.id}`)}>Comments</button>
                       <button>Likes: {album.likes}</button>
                     </div>

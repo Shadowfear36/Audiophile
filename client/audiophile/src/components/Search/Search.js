@@ -28,7 +28,7 @@ const renderUsers = users.map(user => {
   let url = user.image_url
   return <div id="user-card" onClick={()=> navigate(`/profile/${user.username}`)}>
      <img src={url}/>
-    <h4>{user.username}</h4>
+    <h4>@{user.username}</h4>
   </div>
 });
 
@@ -62,7 +62,7 @@ const renderPlaylists = playlists.map(playlist => {
       <div id="search-wrapper">
           <h2>Search</h2>
           <input id="search-bar-input" placeholder="Find Users, Songs, Playlists, & Albums" onChange={(e) => setSearchTerm(e.target.value)}/>
-          <section>
+          <section id="user-section">
             <h4>Users</h4>
             <div id="render-container">
               {renderUsers}

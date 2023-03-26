@@ -11,8 +11,8 @@ export default function () {
     // initialize User Context
     const { userState, setUserState } = useContext(UserContext);
 
-    //page state for .active button class
-    const [activeState, setActiveState] = useState({active: "home"})
+    // //page state for .active button class
+    // const [activeState, setActiveState] = useState({active: "home"})
 
     const handleLogout = () => {
       fetch('http://localhost:3000/logout', {
@@ -21,7 +21,25 @@ export default function () {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({user_id: userState.user_id})
-      }).then(res => res.json()).then(console.log)
+      }).then(res => res.json()).then(console.log).then(() => {
+        setUserState({
+          isLoggedIn: false,
+          user_id: '',
+          page: '',
+          name: '',
+          username: '',
+          email: '',
+          age: '',
+          gender: '',
+          password_digest: '',
+          user_type: '',
+          currentSong: [],
+          queue: []
+        })
+
+        navigate('/')
+        
+      })
     }
 
   return (

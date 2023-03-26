@@ -18,7 +18,7 @@ function AudioUploadForm() {
       e.preventDefault();
 
       const formData = new FormData()
-      formData.append('user_id', 1)
+      formData.append('user_id', userState.user_id)
       formData.append('name', name)
       formData.append('audio', audioData)
       formData.append('image', imageData)

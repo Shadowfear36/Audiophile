@@ -26,7 +26,7 @@ class Album < ApplicationRecord
     end
 
     def comments
-        return self.poly_comments
+        return self.poly_comments.as_json(only: [:user_id, :id, :content], methods: [:username, :pfp_url])
     end
 
 end

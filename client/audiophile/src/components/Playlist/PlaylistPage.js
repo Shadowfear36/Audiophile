@@ -5,6 +5,8 @@ import SongList from '../SongList';
 import './playlistpage.css'
 import Navbar from '../Navbar';
 import AudioPlayer from '../AudioPlayer';
+import { BsFillHeartFill } from "react-icons/bs";
+
 
 export default function PlaylistPage() {
   let {id} = useParams();
@@ -86,7 +88,7 @@ export default function PlaylistPage() {
                     <h5 onClick={() => navigate(`/profile/${playlist.artist}`)}>{playlist.artist}</h5>
                   </div>
                   <div id="card-social-btns">
-                    <button onClick={handleLike}>{"<3"}</button>
+                    <button onClick={handleLike}><BsFillHeartFill/></button>
                     <button onClick={() => navigate(`/playlist/${playlist.id}`)}>Comments</button>
                     <button>Likes: {playlist.likes}</button>
                   </div>

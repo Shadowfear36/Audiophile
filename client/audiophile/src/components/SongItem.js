@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs";
+import { BsFillPlayFill, BsFillPauseFill, BsFillHeartFill, BsPlusSquare} from "react-icons/bs";
 import './songlist.css';
 import { UserContext } from "../context/user";
 import { useNavigate } from 'react-router-dom';
@@ -82,10 +82,10 @@ export default function ({ song, i}) {
             <h4 id="song-index">{i}</h4>
             <h4 onClick={() => navigate(`/song/${song.id}`)} id="song-list-title">{song.name}</h4>
             <div id="song-list-like" onClick={handleLike}>
-              <p onClick={handleLike}>{"<3"}</p>
+              <p onClick={handleLike}><BsFillHeartFill/></p>
             </div>
             <div id="song-list-add">
-              <p onClick={handleAddToPlayList}>[+]</p>
+              <p onClick={handleAddToPlayList}><BsPlusSquare/></p>
             </div>
             <div id="song-list-play" onClick={handleClick}>
                 <BsFillPlayFill size={25}/>

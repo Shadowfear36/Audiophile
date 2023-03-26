@@ -32,7 +32,7 @@ export default function CAlbums() {
   return (
     <div id="CSongs-container">
        <div id="Songcard-wrapper">
-            <GroupCard name="Album 1Name" image="https://place-hold.it/200" songs={[]}/>
+            <GroupCard name={albumName} image="https://place-hold.it/200" songs={[]}/>
        </div>
        <div id="upload_container">
             <label for="albumname">Album Name</label>

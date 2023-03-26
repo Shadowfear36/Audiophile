@@ -1,10 +1,9 @@
 class SessionsController < ApplicationController
-    @current_user = nil;
     def create
         user = User.find_by(email: params[:email])
         if user && user.authenticate(params[:password])
-            session[:username] = user.username
-            @current_user = session[:username]
+            session[:user_id] = user.id
+            @current_user = session[:user_id]
             render json: user, status: :ok
         else
             render json: {error: "Invalid Email or Password"}, status: :unprocessable_entity

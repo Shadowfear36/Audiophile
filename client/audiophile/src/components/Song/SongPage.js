@@ -41,6 +41,7 @@ export default function SongPage() {
   }
 
   const renderComments = comments.map((comment) => {
+    console.log(comment);
     return <div id="commentCard">
       <img onClick={() => navigate(`/profile/${comment.username}`)} src={comment.pfp_url}/>
       <div>
