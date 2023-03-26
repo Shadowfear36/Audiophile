@@ -18,10 +18,10 @@ class SongsController < ApplicationController
       render json: @song, serializer: SongsSerializer, status: :ok
     end
   
-    def delete
+    def destroy
       @song = Song.find(params[:id])
       @song.destroy
-      render json: { "Success": "Song Deleted" }, status: :deleted
+      render json: { "Success": "Song Deleted" }, status: :ok
     end
 
     def link
@@ -29,6 +29,10 @@ class SongsController < ApplicationController
       @url = @song.audio_url
       render json: @url, status: :ok
     end
+
+
+    # def most_liked
+    # end
   
     private
   

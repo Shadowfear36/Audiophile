@@ -12,7 +12,7 @@ class PlaylistsController < ApplicationController
 
     def create
         @playlist = Playlist.create!(playlist_params)
-        render json: PlaylistSerializer.new(@playlist).serializable_hash[:data][:attributes]
+        render json: @playlist, serializer: PlaylistsSerializer, status: :ok
     rescue ActiveRecord::RecordInvalid => e
         render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
     end
@@ -44,6 +44,6 @@ class PlaylistsController < ApplicationController
     private
 
     def playlist_params
-        params.permit(:id, :name, :user_id, :likes)
+        params.permit(:id, :name, :user_id, :likes, :image)
     end
 end

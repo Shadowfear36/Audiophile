@@ -7,8 +7,30 @@ class User < ApplicationRecord
 
 
     has_many :albums
-    has_many :comments
     has_many :songs
     has_many :playlists
-    has_many :likes
+
+    has_many :poly_comments
+    has_many :poly_likes
+
+    has_many :liked_songs, through: :poly_likes, source: :likeable, source_type: 'Song'
+    has_many :liked_albums, through: :poly_likes, source: :likeable, source_type: 'Album'
+    has_many :liked_playlists, through: :poly_likes, source: :likeable, source_type: 'Playlist'
+
+    
+
+    has_one_attached :image, service: :google
+
+    def image_url
+        if self.image.attached?
+            return 'https://storage.googleapis.com/audio_bucket_1_d/' + self.image.key
+        else
+            return nil
+        end
+    end
+
+    def songs_liked
+        return self.liked_songs
+    end
+
 end

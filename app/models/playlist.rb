@@ -2,17 +2,34 @@ class Playlist < ApplicationRecord
     validates_presence_of :name
 
     belongs_to :user
-    
-    has_many :songs
-    has_many :comments
+
     has_many :playlist_songs
-    has_many :likes
+
+    has_many :poly_comments, as: :commentable
+    has_many :poly_likes, as: :likeable
+
     has_many :songs, through: :playlist_songs
 
-    # def songs
-    #     @songs = self.playlist_songs.map do |playlistsong|
-    #         playlistsong.song.as_json({methods: :audio_url})
-    #     end
-    # end
+    has_one_attached :image
+    
+    def image_url
+        if self.image.attached?
+            return 'https://storage.googleapis.com/audio_bucket_1_d/' + self.image.key
+        else
+            return nil
+        end
+    end
+
+    def likes
+        return self.poly_likes.length
+    end
+
+    def comments
+        return self.poly_comments.as_json(only: [:user_id, :id, :content], methods: [:username, :pfp_url])
+    end
+
+    def artist
+        return self.user.username
+    end
 
 end

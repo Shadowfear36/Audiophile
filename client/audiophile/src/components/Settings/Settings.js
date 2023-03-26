@@ -70,11 +70,29 @@ export default function Settings() {
     }).then(res => res.json()).then(console.log)
   }
 
+  const [imageData, setImageData] = useState(null);
+  console.log(imageData);
+  const handleUpload = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData()
+    formData.append('image', imageData)
+
+    console.log(formData);
+
+    fetch(`http://localhost:3000/users/${userState.user_id}`, {
+      method: 'PATCH',
+      body: formData
+    }).then(res => res.json()).then(obj => console.log(obj))
+  };
+
   return (
     <div id="settings-page-container">
       <Navbar/>
       <div id="settings-container">
         <h2>Settings</h2>
+        <input type="file" accept="image/*" id="file" name="image" onChange={(e) => setImageData(e.target.files[0])}/>
+        <button onClick={handleUpload}>Upload</button>
         <form id="settings-form" onSubmit={(e) => handleSubmit(e)}>
           <label for="name">Name</label>
           <input type="text" name="name" value={formState.name} onChange={handleChange} />

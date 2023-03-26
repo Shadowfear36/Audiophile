@@ -2,14 +2,23 @@ import React from 'react'
 import './songlist.css';
 import SongItem from './SongItem.js';
 
-export default function SongList({songs}) {
+export default function SongList({songs, card, full}) {
     let i = 0;
 
     const renderSongs = songs.map((obj) => {
         i+=1
-        return (
-        <SongItem song={obj} i={i}/>
-        )
+
+        if (i - 1  <= 2 && card === true) {
+            return <SongItem song={obj} i={i}/>
+        } if (card === false){
+            return <SongItem song={obj} i={i}/>
+        } if (full === true) {
+            return <SongItem song={obj} i={i}/>
+        }
+        
+        else {
+            return null;
+        }
     })
 
     const isSongsFull = () => {

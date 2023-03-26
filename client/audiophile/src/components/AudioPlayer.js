@@ -25,7 +25,7 @@ function AudioPlayer() {
       "name": "Add A Song",
       "user_id": 1,
       "audio_url": null,
-      "artist": "@username",
+      "artist": "username",
       "album": {
         "id": 1,
         "name": "First Album",
@@ -127,10 +127,10 @@ function AudioPlayer() {
 
   return (
     <div id="audio-player-container">
-        <img id="album" src="https://place-hold.it/75"/>
-        <div id="artist-info">
+        <img id="album" src={currentSong.image_url}/>
+        <div id="artist-info2">
             <h3>{currentSong.name}</h3>
-            <h5>@Artist User</h5>
+            <h5>@{currentSong.artist}</h5>
         </div>
     <div className="audio-player">
       <audio ref={audioRef} src={currentSong.audio_url} />

@@ -5,9 +5,10 @@ class UsersController < ApplicationController
     end
 
     def show
-      @user = User.find_by username: params[:id]
+      @user = User.find_by(username: params[:id])
       render json: @user, serializer: UsersSerializer, status: :ok
     end
+
 
     def create
       @user = User.create!(user_params)
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
 
     def update
       @user = User.find(params[:id])
-      @user.update!(user_params)
+      @user.update(user_params)
       render json: @user, status: :ok
     end
 
@@ -31,10 +32,28 @@ class UsersController < ApplicationController
       render json: { "Success": "User And Dependents Were Deleted!"}, status: :ok
     end
 
+    def albums
+      @user = User.find(params[:id])
+      @albums = @user.albums
+      render json: @albums, status: :ok
+    end
+
+    def playlists
+      @user = User.find(params[:id])
+      @playlists = @user.playlists
+      render json: @playlists, status: :ok
+    end
+
+    def liked_songs
+      @user = User.find_by_username(params[:id])
+      @songs = @user.songs_liked
+      render json: @songs, each_serializer: SongsSerializer, status: :ok
+    end
+
     private
 
     def user_params
-      params.require(:user).permit(:name, :email,:username, :password, :password_confirmation, :gender, :age, :user_type )
+      params.permit(:id, :name, :email,:username, :password, :password_confirmation, :gender, :age, :user_type, :image )
     end
 
 end

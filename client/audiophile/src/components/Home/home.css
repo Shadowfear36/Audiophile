@@ -14,3 +14,55 @@
     height: 100%;
     position: relative;
 }
+
+#home-song {
+    background-color: lightgray;
+    text-align: center;
+    border-radius: 10px;
+    margin: 5px;
+    width: 150px;
+}
+
+#home-song > img {
+    height: 100px;
+    width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    
+}
+
+#home-song > p {
+    margin-top: 0px;
+    padding: 5px;
+    width: 90%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-wrap: break-sentence;
+}
+
+#tren-songs {
+    display: flex;
+    flex-direction: row;
+    overflow-y: scroll;
+    width: 75%;
+}
+
+#home-wrapper > h2 {
+    font-size: 32px;
+    font-weight: 900;
+    height: 25px;
+    margin: 0px;
+    margin-top: 10px;
+}
+
+#home-wrapper > h4 {
+    font-weight: 900;
+    font-size: 20px;
+}
+#x {
+    color: red;
+    font-size: 24px;
+    align-self: left;
+}

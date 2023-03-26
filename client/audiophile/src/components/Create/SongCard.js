@@ -6,7 +6,7 @@ export default function SongCard(props) {
   return (
     <div id="home-card-container">
       <div id="card-details">
-        <h6>@username</h6>
+        <h6>@{props.artist}</h6>
         <h6>Creating</h6>
       </div>
       <div id="home-card-wrapper">
