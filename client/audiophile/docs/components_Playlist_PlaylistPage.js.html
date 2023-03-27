@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Playlist/PlaylistPage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Playlist/PlaylistPage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect, useContext} from 'react'
+import { UserContext } from '../../context/user';
+import { useParams, useNavigate } from 'react-router-dom';
+import SongList from '../SongList';
+import './playlistpage.css'
+import Navbar from '../Navbar';
+import AudioPlayer from '../AudioPlayer';
+import { BsFillHeartFill } from "react-icons/bs";
+
+/**
+ * Component for showing details of an individual playlist
+ *
+ * @component
+ * @example
+ * return (
+ *   &lt;PlaylistPage />
+ * )
+ */
+
+export default function PlaylistPage() {
+  let {id} = useParams();
+
+  const navigate = useNavigate();
+
+  const [playlist, setPlaylist] = useState([]);
+
+  const [comments, setComments] = useState([]);
+
+  const [songs, setSongs] = useState([]);
+
+  const [userComment, setUserComment] = useState([]);
+
+
+  const { userState, setUserState } = useContext(UserContext);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/playlists/${id}`)
+    .then(res => res.json()).then((obj) => {
+      setPlaylist(obj)
+      setComments(obj.comments)
+      setSongs(obj.songs)
+    });
+  },[])
+
+  const handleLike = () => {
+    fetch(`http://localhost:3000/poly_likes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        likeable_type: "Playlist",
+        likeable_id: playlist.id,
+        user_id: userState.user_id
+      })
+    }).then(res => res.json()).then(console.log)
+  }
+
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    fetch(`http://localhost:3000/poly_comments`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        commentable_type: "Playlist",
+        commentable_id: id,
+        user_id: userState.user_id,
+        content: userComment
+      })
+    }).then(res => res.json()).then(obj => console.log(obj));
+  }
+
+  const renderComments = comments.map((comment) => {
+    return &lt;div id="commentCard">
+      &lt;img src={comment.pfp_url}/>
+      &lt;div>
+        &lt;h4>{comment.username}&lt;/h4>
+        &lt;p>{comment.content}&lt;/p>
+      &lt;/div>
+    &lt;/div>
+  })
+
+  return (
+    &lt;div id="album-page-container">
+      &lt;Navbar />
+        &lt;div id="album-page-wrapper">
+
+          &lt;div id="home-card-container">
+          &lt;div id="card-details">
+            &lt;h6>@{playlist.artist}&lt;/h6>
+            &lt;h6>{playlist.created_at}&lt;/h6>
+          &lt;/div>
+          &lt;div id="home-card-wrapper">
+            &lt;img src={playlist.image_url} onClick={() => navigate(`/playlist/${playlist.id}`)}/>
+            &lt;div id="card-info-display">
+                &lt;div id="info-top">
+                  &lt;div id="artist-info">
+                    &lt;h3 onClick={() => navigate(`/playlist/${playlist.id}`)}>{playlist.name}&lt;/h3>
+                    &lt;h5 onClick={() => navigate(`/profile/${playlist.artist}`)}>{playlist.artist}&lt;/h5>
+                  &lt;/div>
+                  &lt;div id="card-social-btns">
+                    &lt;button onClick={handleLike}>&lt;BsFillHeartFill/>&lt;/button>
+                    &lt;button onClick={() => navigate(`/playlist/${playlist.id}`)}>Comments&lt;/button>
+                    &lt;button>Likes: {playlist.likes}&lt;/button>
+                  &lt;/div>
+                &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+
+        &lt;div id="content_wrapper">
+
+        &lt;div id="left-container">
+          &lt;SongList songs={songs} full={true}/>
+        &lt;/div>
+        &lt;div id="right-container">
+          &lt;div id="add-comment">
+                &lt;h4>Add A Comment&lt;/h4>
+                &lt;input type="text" onChange={(e) => setUserComment(e.target.value)}/>
+                &lt;button onClick={handleCommentSubmit}>Submit&lt;/button>
+              &lt;/div>
+            &lt;p>Comments&lt;/p>
+          &lt;div id="comment-container">
+            {renderComments}
+          &lt;/div>
+        &lt;/div>
+        &lt;/div>
+
+        &lt;div className="audio-player-container">
+            &lt;AudioPlayer />
+        &lt;/div>
+        &lt;/div>
+    &lt;/div>
+  )
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="AudioPlayer.html">AudioPlayer</a></li><li><a href="AudioUploadForm.html">AudioUploadForm</a></li><li><a href="UserProvider.html">UserProvider</a></li><li><a href="module.exports.html">exports</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Mar 27 2023 13:19:00 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

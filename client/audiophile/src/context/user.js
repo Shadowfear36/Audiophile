@@ -2,6 +2,18 @@ import React, { useEffect } from 'react';
 
 const UserContext = React.createContext();
 
+/**
+ * Component for creating a Users Context
+ *
+ * @component
+ * @example
+ * return (
+ *   <UserProvider>
+ *      <ChildComponent/>
+ *    </UserProvider>
+ * )
+ */
+
 function UserProvider({ children }) {
   const defaultState = {
     isLoggedIn: false,

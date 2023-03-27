@@ -2,6 +2,17 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import './Home/homecard.css';
 import SongList from './SongList';
+
+/**
+ * Component for showing details of an individual song
+ *
+ * @component
+ * @example
+ * return (
+ *   <SongCard song={song object} />
+ * )
+ */
+
 export default function SongCard({song}) {
     const navigate = useNavigate();
   return (

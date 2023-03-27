@@ -5,6 +5,16 @@ import AudioPlayer from '../AudioPlayer';
 import SongList from '../SongList';
 import { UserContext } from "../../context/user";
 
+/**
+ * Component for showing Users Liked Music
+ *
+ * @component
+ * @example
+ * return (
+ *   <Music />
+ * )
+ */
+
 export default function Music() {
   const [songs, setSongs] = useState([]);
 

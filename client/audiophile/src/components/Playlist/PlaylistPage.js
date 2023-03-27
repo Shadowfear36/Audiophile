@@ -7,6 +7,15 @@ import Navbar from '../Navbar';
 import AudioPlayer from '../AudioPlayer';
 import { BsFillHeartFill } from "react-icons/bs";
 
+/**
+ * Component for showing details of an individual playlist
+ *
+ * @component
+ * @example
+ * return (
+ *   <PlaylistPage />
+ * )
+ */
 
 export default function PlaylistPage() {
   let {id} = useParams();

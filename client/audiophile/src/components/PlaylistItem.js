@@ -2,6 +2,16 @@ import React, { useState, useEffect } from 'react'
 import SongList from './SongList';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component for showing details a playlist item
+ *
+ * @component
+ * @example
+ * return (
+ *   <PlaylistItem playlist={array of playlist objects} />
+ * )
+ */
+
 export default function PlaylistItem(playlist) {
     const [songs, setSongs] = useState([]);
 

@@ -3,6 +3,16 @@ import SongList from './SongList';
 import "./albumitem.css";
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component for showing details of an album item
+ *
+ * @component
+ * @example
+ * return (
+ *   <AlbumItem album={album object} />
+ * )
+ */
+
 export default function AlbumItem(album) {
   const [songs, setSongs] = useState([]);
 

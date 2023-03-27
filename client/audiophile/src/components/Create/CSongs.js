@@ -4,6 +4,16 @@ import "./createpage.css";
 import { UserContext } from "../../context/user";
 import AudioUploadForm from '../AudioUploadForm';
 
+/**
+ * Component for showing Create Songs Form.
+ *
+ * @component
+ * @example
+ * return (
+ *   <CSongs />
+ * )
+ */
+
 export default function CSongs() {
 
     // initialize User Context

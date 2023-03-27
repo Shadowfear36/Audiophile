@@ -4,7 +4,17 @@ import './songlist.css';
 import { UserContext } from "../context/user";
 import { useNavigate } from 'react-router-dom';
 
-export default function ({ song, i}) {
+/**
+ * Component for showing details of an individual song in a song list.
+ *
+ * @component
+ * @example
+ * return (
+ *   <SongItem  song={song object} i={playlist/album song index}/>
+ * )
+ */
+
+export default function SongItem({ song, i}) {
 
     // initialize User Context
     const { userState, setUserState } = useContext(UserContext);

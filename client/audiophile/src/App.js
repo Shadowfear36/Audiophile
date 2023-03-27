@@ -12,6 +12,16 @@ import AlbumPage from './components/Album/AlbumPage';
 import PlaylistPage from './components/Playlist/PlaylistPage';
 import SongPage from './components/Song/SongPage';
 
+/**
+ * Component for routing and displaying the application routes
+ *
+ * @component
+ * @example
+ * return (
+ *   <App />
+ * )
+ */
+
 function App() {
   return (
     <div className="App">

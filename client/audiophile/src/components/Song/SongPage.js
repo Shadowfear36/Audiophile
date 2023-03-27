@@ -7,6 +7,16 @@ import AudioPlayer from '../AudioPlayer';
 import { UserContext } from '../../context/user';
 import Navbar from '../Navbar';
 
+/**
+ * Component for Displaying a Single Song and its Comments
+ *
+ * @component
+ * @example
+ * return (
+ *   <SongPage />
+ * )
+ */
+
 export default function SongPage() {
   let {id} = useParams();
 

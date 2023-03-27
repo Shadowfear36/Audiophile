@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/AudioPlayer.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/AudioPlayer.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useRef, useEffect, useContext } from 'react';
+import './audioplayer.css';
+import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs"
+import { UserContext } from "../context/user";
+
+/**
+ * Component for showing an audio player
+ *
+ * @component
+ * @example
+ * return (
+ *   &lt;AudioPlayer />
+ * )
+ */
+
+function AudioPlayer() {
+
+  // initialize User Context
+  const { userState, setUserState } = useContext(UserContext);
+
+  const [index, setIndex] = useState(0)
+
+  
+  const checkIfQueueIsEmpty = () => {
+    if (userState.queue.length === 0) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  const blankQueue = {
+      "id": 1,
+      "name": "Add A Song",
+      "user_id": 1,
+      "audio_url": null,
+      "artist": "username",
+      "album": {
+        "id": 1,
+        "name": "First Album",
+        "user_id": 1,
+        "likes": [],
+        "created_at": "2023-03-20T15:48:48.446Z",
+        "updated_at": "2023-03-20T15:48:48.446Z"
+      }
+  }
+
+  
+  const [currentSong, setCurrentSong] = useState(checkIfQueueIsEmpty()? userState.queue[index] : blankQueue)
+
+  // console.log(currentSong2);
+
+  //set states
+  const [currentTime, setCurrentTime] = useState(0);
+  const [volume, setVolume] = useState(0.5);
+  const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isEnded, setIsEnded] = useState();
+  // create a reference to the Audio tag itself
+  const audioRef = useRef(null);
+
+  //useEffect to ensure it only attempts to fetch metadata once
+  useEffect(() => {
+    const audio = audioRef.current;
+
+    //updates time location of song
+    const handleTimeUpdate = () => {
+      setCurrentTime(audio.currentTime);
+    };
+
+    // updates song duration from file metadata
+    const handleLoadedMetadata = () => {
+      setDuration(audio.duration);
+    };
+
+    //event listeners to call on above functions
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+
+    //once metadata retrieved quit listening for changes
+    return () => {
+      audio.removeEventListener('timeupdate', handleTimeUpdate);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+    };
+  }, [audioRef.current]);
+
+  //handle volume change on range
+  const handleVolumeChange = (event) => {
+    setVolume(event.target.value);
+    audioRef.current.volume = event.target.value;
+  };
+
+  //handle time change on progress range
+  const handleTimeChange = (event) => {
+    setCurrentTime(event.target.value);
+    audioRef.current.currentTime = event.target.value;
+  };
+
+  //play pause handler
+  const handlePlayPauseClick = () => {
+    const audio = audioRef.current;
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  // useEffec
+  // setIsEnded(audioRef.current.ended)
+
+  // audioRef.current.ended ? setIndex(index + 1) : console.log('playing');
+
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    if (index &lt; userState.queue.length - 1) {
+      setIndex(index + 1)
+      setCurrentSong(userState.queue[index]);
+      setCurrentTime(0);
+    }else {
+      console.log("Nothing left to skip to");
+    }
+  }
+
+  const handlePrev = (e) => {
+    e.preventDefault();
+    if (index > 1) {
+      setIndex(index - 1)
+      setCurrentSong(userState.queue[index]);
+    }else {
+      console.log("Nothing left to go back to");
+    }
+  }
+
+  return (
+    &lt;div id="audio-player-container">
+        &lt;img id="album" src={currentSong.image_url}/>
+        &lt;div id="artist-info2">
+            &lt;h3>{currentSong.name}&lt;/h3>
+            &lt;h5>@{currentSong.artist}&lt;/h5>
+        &lt;/div>
+    &lt;div className="audio-player">
+      &lt;audio ref={audioRef} src={currentSong.audio_url} />
+            &lt;div id="volume-container">
+                &lt;label id="volume-wrapper">
+                    Volume
+                    &lt;input
+                    id="volume-controller"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value={volume}
+                    onChange={handleVolumeChange}
+                    />
+                &lt;/label>
+            &lt;/div>
+        &lt;div id="top-player">
+            &lt;div id="audio-btn-container">
+                &lt;button onClick={handlePrev}>{'&lt;&lt;'}&lt;/button>
+                &lt;button id="audio-btn" onClick={handlePlayPauseClick}>
+                {isPlaying ? &lt;BsFillPauseFill size={30}/> : &lt;BsFillPlayFill size={30}/>}
+                &lt;/button>
+                &lt;button onClick={handleNext}>{'>>'}&lt;/button>
+            &lt;/div>
+        &lt;/div>
+        &lt;div id="bottom-player">
+            &lt;label id="time-scrub-wrapper">
+                &lt;input
+                id="time-scrub"
+                type="range"
+                min="0"
+                max={duration}
+                value={currentTime}
+                onChange={handleTimeChange}
+                />
+                {Math.floor(currentTime)}/{Math.floor(duration)}
+            &lt;/label>
+          &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+export default AudioPlayer;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="AudioPlayer.html">AudioPlayer</a></li><li><a href="AudioUploadForm.html">AudioUploadForm</a></li><li><a href="UserProvider.html">UserProvider</a></li><li><a href="module.exports.html">exports</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Mar 27 2023 13:19:00 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

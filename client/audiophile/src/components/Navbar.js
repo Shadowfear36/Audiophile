@@ -3,7 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../context/user";
 import './navbar.css';
 
-export default function () {
+/**
+ * Component for showing the navigation bar
+ *
+ * @component
+ * @example
+ * return (
+ *   <Navbar />
+ * )
+ */
+
+export default function Navbar() {
 
     //initialize navigation
     const navigate = useNavigate();
