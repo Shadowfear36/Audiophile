@@ -115,6 +115,13 @@ npm start
 
 ### Users
 
+#### Relationships
+    has_many :playlist_songs
+    has_many :poly_comments, as: :commentable
+    has_many :poly_likes, as: :likeable
+    has_one_attached :audio, service: :google
+    has_one_attached :image, service: :google
+
 #### Get all users
 
 ```http
@@ -174,6 +181,22 @@ Returns the users song likes (Will eventually return albums, & playlists as well
 
 ### Songs
 
+#### Relationships
+    has_secure_password
+    has_many :albums
+    has_many :songs
+    has_many :playlists
+    has_many :poly_comments
+    has_many :poly_likes
+    has_many :liked_songs, through: :poly_likes, source: :likeable, source_type: 'Song'
+    has_many :liked_albums, through: :poly_likes, source: :likeable, source_type: 'Album'
+    has_many :liked_playlists, through: :poly_likes, source: :likeable, source_type: 'Playlist'
+
+    
+
+    has_one_attached :image, service: :google
+
+
 #### Get all Songs
 
 ```http
@@ -208,6 +231,14 @@ Returns the users song likes (Will eventually return albums, & playlists as well
 ```
 ### Albums
 
+#### Relationships
+
+    has_one :user
+    has_many :songs
+    has_many :poly_comments, as: :commentable
+    has_many :poly_likes, as: :likeable
+    has_one_attached :image, service: :google
+
 #### Get all Albums
 
 ```http
@@ -240,6 +271,13 @@ Returns the users song likes (Will eventually return albums, & playlists as well
 ```
 
 ### Playlists
+
+#### Relationships
+    has_many :playlist_songs
+    has_many :poly_comments, as: :commentable
+    has_many :poly_likes, as: :likeable
+    has_many :songs, through: :playlist_songs
+    has_one_attached :image
 
 #### Get all Playlists
 
@@ -274,6 +312,11 @@ Returns the users song likes (Will eventually return albums, & playlists as well
 
 ### Playlist Songs (Join Table)
 
+#### Relationships
+
+    belongs_to :playlist
+    belongs_to :song
+
 #### Get all Playlist Songs
 
 ```http
@@ -307,6 +350,11 @@ Returns the users song likes (Will eventually return albums, & playlists as well
 
 ### Poly Likes (Polymorphic Likes Table)
 
+#### Relationships
+
+  belongs_to :user
+  belongs_to :likeable, polymorphic: true
+
 #### Get all likes
 
 ```http
@@ -338,6 +386,10 @@ Returns the users song likes (Will eventually return albums, & playlists as well
 ```
 
 ### Poly Comments (Polymorphic Comments Table)
+
+#### Relationships
+  belongs_to :user
+  belongs_to :commentable, polymorphic: true
 
 #### Get all comments
 
