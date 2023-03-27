@@ -16,6 +16,12 @@ A Social Media Like Music App for Artists, DJs, Producers, and even Listeners to
 **Server:** Ruby, Rails, Google Cloud Services
 
 
+## Documentation
+Frontend Is Using JSDoc
+Navigate to the Docs Folder ***/client/docs***
+Open ***App.html*** To a Live Server To View A Static Site of Documentation.
+
+
 ## Demo
 
 [Link To Watch Demo](https://www.awesomescreenshot.com/video/15979354?key=f4a97d14d2561ed762840dd30a24557e)
@@ -459,10 +465,6 @@ Returns the users song likes (Will eventually return albums, & playlists as well
 ```http
   GET /trending
 ```
-
-## Documentation
-
-[Documentation](https://linktodocumentation)
 
 
 
