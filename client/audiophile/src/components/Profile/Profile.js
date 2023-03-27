@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './profile.css';
 import Navbar from '../Navbar';
 import PSongs from './PSongs';
@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import AudioPlayer from '../AudioPlayer';
 import PAlbums from './PAlbums';
 import PPlaylists from './PPlaylists';
+import { UserContext } from '../../context/user';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Component for showing details of the users profile or other users profiles.
@@ -25,7 +27,11 @@ export default function Profile() {
   const [playlists, setPlaylists] = useState([]);
   const [image, setImage] = useState(null);
   const [pageState, setPageState] = useState(1);
+
+  const { userState, setUserState } = useContext(UserContext);
   
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetch(`http://localhost:3000/users/${username}`)
@@ -62,7 +68,7 @@ export default function Profile() {
 
 
   return (
-    <div id="profile-page-container">
+    userState.isLoggedIn ? <div id="profile-page-container">
         <Navbar />
         <div id="profile-wrapper">
             <div id="profile-hdr">
@@ -84,6 +90,18 @@ export default function Profile() {
               </div>
             </div>
         </div>
+    </div> : <div id="notloggedIn">
+      <div>
+        <h1>Audiophile</h1>
+      </div>
+      <div id="log-container">
+        <h2>Uhh Ohh</h2>
+        <p>You are not logged in. Please Log In Or Sign Up.</p>
+        <div id="btn-log">
+          <button onClick={() => navigate('/')}>Login</button>
+          <button onClick={() => navigate('/signup')}>Sign Up</button>
+        </div>
+      </div>
     </div>
   )
 }

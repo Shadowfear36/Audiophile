@@ -79,7 +79,7 @@ export default function PlaylistPage() {
   })
 
   return (
-    <div id="album-page-container">
+    userState.isLoggedIn ? <div id="album-page-container">
       <Navbar />
         <div id="album-page-wrapper">
 
@@ -128,6 +128,18 @@ export default function PlaylistPage() {
             <AudioPlayer />
         </div>
         </div>
+    </div> : <div id="notloggedIn">
+      <div>
+        <h1>Audiophile</h1>
+      </div>
+      <div id="log-container">
+        <h2>Uhh Ohh</h2>
+        <p>You are not logged in. Please Log In Or Sign Up.</p>
+        <div id="btn-log">
+          <button onClick={() => navigate('/')}>Login</button>
+          <button onClick={() => navigate('/signup')}>Sign Up</button>
+        </div>
+      </div>
     </div>
   )
 }

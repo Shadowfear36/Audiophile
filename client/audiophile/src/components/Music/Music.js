@@ -4,7 +4,7 @@ import Navbar from '../Navbar';
 import AudioPlayer from '../AudioPlayer';
 import SongList from '../SongList';
 import { UserContext } from "../../context/user";
-
+import { useNavigate } from 'react-router-dom';
 /**
  * Component for showing Users Liked Music
  *
@@ -18,6 +18,8 @@ import { UserContext } from "../../context/user";
 export default function Music() {
   const [songs, setSongs] = useState([]);
 
+  const navigate = useNavigate();
+
   // initialize User Context
   const { userState, setUserState } = useContext(UserContext);
   
@@ -28,7 +30,7 @@ export default function Music() {
 
   console.log(songs);
   return (
-    <div id="music-page-container">
+    userState.isLoggedIn ? <div id="music-page-container">
       <Navbar/>
       <div id="music-page-wrapper">
         <h2>Liked Songs</h2>
@@ -39,6 +41,18 @@ export default function Music() {
         </div>
         <div className="audio-player-container">
                 <AudioPlayer />
+        </div>
+      </div>
+    </div> : <div id="notloggedIn">
+      <div>
+        <h1>Audiophile</h1>
+      </div>
+      <div id="log-container">
+        <h2>Uhh Ohh</h2>
+        <p>You are not logged in. Please Log In Or Sign Up.</p>
+        <div id="btn-log">
+          <button onClick={() => navigate('/')}>Login</button>
+          <button onClick={() => navigate('/signup')}>Sign Up</button>
         </div>
       </div>
     </div>

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './search.css';
 import Navbar from '../Navbar.js';
 import AudioPlayer from '../AudioPlayer';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/user';
+
 
 /**
  * Component for Allowing Users To Search other Users, Albums, Songs, & Playlists.
@@ -23,6 +25,8 @@ const [users, setUsers] = useState([]);
 const [songs, setSongs] = useState([]);
 const [albums, setAlbums] = useState([]);
 const [playlists, setPlaylists] = useState([]);
+
+const { userState, setUserState } = useContext(UserContext);
 
 useEffect(() => {
   fetch(`http://localhost:3000/search/${searchTerm}`)
@@ -67,7 +71,7 @@ const renderPlaylists = playlists.map(playlist => {
 });
 
   return (
-    <div id="search-container">
+    userState.isLoggedIn ? <div id="search-container">
       <Navbar />
       <div id="search-wrapper">
           <h2>Search</h2>
@@ -99,6 +103,18 @@ const renderPlaylists = playlists.map(playlist => {
           <div className="audio-player-container">
                 <AudioPlayer />
           </div>
+      </div>
+    </div> : <div id="notloggedIn">
+      <div>
+        <h1>Audiophile</h1>
+      </div>
+      <div id="log-container">
+        <h2>Uhh Ohh</h2>
+        <p>You are not logged in. Please Log In Or Sign Up.</p>
+        <div id="btn-log">
+          <button onClick={() => navigate('/')}>Login</button>
+          <button onClick={() => navigate('/signup')}>Sign Up</button>
+        </div>
       </div>
     </div>
   )
