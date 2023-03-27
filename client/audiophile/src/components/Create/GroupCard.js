@@ -3,7 +3,18 @@ import '../Home/homecard.css';
 import SongList from '../SongList';
 import { UserContext } from "../../context/user";
 
-export default function ({name, songs, image}) {
+/**
+ * Component for displaying create pages Album or playlist cards.
+ *
+ * @component
+ * @example
+ * return (
+ *   <GroupCard name={album||playlist} songs={array of song objects} image={album||playlist imageUrl}/>
+ * )
+ */
+
+export default function GroupCard({name, songs, image}) {
+
         // initialize User Context
         const { userState, setUserState } = useContext(UserContext);
   return (

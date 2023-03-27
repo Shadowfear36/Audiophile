@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Signup/Signup.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Signup/Signup.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect, useContext } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { UserContext } from "../../context/user";
+import './signup.css';
+
+/**
+ * Component for showing Signup Page
+ *
+ * @component
+ * @example
+ * return (
+ *   &lt;Signup />
+ * )
+ */
+
+export default function Signup() {
+  //set navigation 
+  const navigate = useNavigate();
+
+  // initialize User Context
+  const { userState, setUserState } = useContext(UserContext);
+
+  //&lt;-----form State------>
+  const initialFormState = {
+    name: '',
+    email: '',
+    username: '',
+    password: '',
+    password_confirmation: '',
+    age: 0,
+    gender: 'M',
+    user_type: 'DJ',
+  }
+  //initialize form state and index
+  const [formState, setFormState] = useState(initialFormState);
+  const [formIndex, setFormIndex] = useState(1);
+
+  // handle form input Change
+  const handleChange = (e) => {
+    setFormState({...formState, [e.target.name]: e.target.value});
+  }
+
+    //handle updating userState after successful login
+    const handleUpdate = (obj) => {
+        console.log('handleUpdate input:', obj);
+        if (obj &amp;&amp; obj.id) {
+            setUserState({
+                isLoggedIn: true,
+                user_id: obj.id,
+                page: 'home',
+                name: obj.name,
+                username: obj.username,
+                email: obj.email,
+                gender: obj.gender,
+                age: obj.age,
+                password_digest: obj.password_digest,
+                user_type: obj.user_type,
+                currentSong: [],
+                queue: []
+              })
+              navigate('/home')
+        } else {
+            console.error("Invalid Object Fetched:", obj);
+        }
+    }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:3000/users", {
+      method:'POST',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(
+        formState)
+    }).then(res => res.json())
+    .then(obj => handleUpdate(obj))
+  }
+
+  const displayForm = () => {
+    if (formIndex === 1) {
+      return form1 
+    }
+
+    if (formIndex === 2) {
+      return form2
+    }
+
+    if (formIndex === 3) {
+      return form3
+    }
+  };
+
+  const handleType = (e) => {
+    e.preventDefault();
+    if (e.target.name === 'DJ') {
+        setFormState({...formState, user_type: "DJ"});
+    }
+
+    if (e.target.name === 'Producer') {
+      setFormState({...formState, user_type: "Producer"});
+    }
+
+    if (e.target.name === 'Artist') {
+      setFormState({...formState, user_type: "Artist"});
+    }
+    else {
+      setFormState({...formState, user_type: "DJ"});
+    }
+  };
+
+
+  const form1 = &lt;>
+                    &lt;label for="name">Name&lt;/label>
+                    &lt;input type="text" name="name" value={formState.name} onChange={handleChange} />
+                    &lt;label for="username">Username&lt;/label>
+                    &lt;input type="text" name="username" value={formState.username} onChange={handleChange}/>
+                    &lt;label for="email">Email&lt;/label>
+                    &lt;input type="text" name="email" value={formState.email} onChange={handleChange}/>
+                    &lt;button onClick={() => setFormIndex(2)}>Next&lt;/button>
+  &lt;/>
+
+  const form2 = &lt;>  
+                    &lt;div id="form2-top">
+                      &lt;div id="age-wrap">
+                        &lt;label for="age">Age&lt;/label>
+                        &lt;input id="num-inp" type="number" name="age" min={0} onChange={handleChange} value={formState.age} />
+                      &lt;/div>
+                      &lt;div id="gen-wrap">
+                        &lt;label for="gender">Gender&lt;/label>
+                        &lt;select id="signup-sel" name="gender" onChange={handleChange} value={formState.gender}>
+                          &lt;option value="M">Male&lt;/option>
+                          &lt;option value="F">Female&lt;/option>
+                          &lt;option value="">Prefer Not To Say&lt;/option>
+                        &lt;/select>
+                      &lt;/div>
+                    &lt;/div>
+                    &lt;div id="btn-cluster">
+                      &lt;button name="DJ" onClick={handleType}>DJ&lt;/button>
+                      &lt;button id="btn-mid" name="Producer" onClick={handleType}>Producer&lt;/button>
+                      &lt;button name="Artist" onClick={handleType}>Artist&lt;/button>
+                    &lt;/div>
+                    &lt;br/>
+                    &lt;div id="btn-cluster">
+                      &lt;button onClick={() => setFormIndex(1)}>Back&lt;/button>
+                      &lt;button onClick={() => setFormIndex(3)}>Next&lt;/button>
+                    &lt;/div>
+  &lt;/>
+
+  const form3 = &lt;>
+                    &lt;label required for="password">Password&lt;/label>
+                    &lt;input type="password" name="password" onChange={handleChange} value={formState.password}/>
+                    &lt;label for="password_confirmation">Confirm Password&lt;/label>
+                    &lt;input required type="password" name="password_confirmation" onChange={handleChange} value={formState.password_confirmation}/>
+                    &lt;button onClick={()=> setFormIndex(2)}>Back&lt;/button>
+                    &lt;button onClick={handleSubmit}>Submit&lt;/button>
+  &lt;/>
+
+
+  return (
+    &lt;div id="signup-container">
+        &lt;div id="login-bg">
+            &lt;h1 className="logo">AudioPhile&lt;/h1>
+            &lt;div id="signup-form-container">
+                &lt;h3>Sign Up&lt;/h3>
+                &lt;form id="signup-form">
+                    {displayForm()}
+                    &lt;NavLink to="/">&lt;h5>Already Have An Account? &lt;/h5>&lt;/NavLink>
+                &lt;/form>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>
+  )
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="AudioPlayer.html">AudioPlayer</a></li><li><a href="AudioUploadForm.html">AudioUploadForm</a></li><li><a href="UserProvider.html">UserProvider</a></li><li><a href="module.exports.html">exports</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Mar 27 2023 13:19:00 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

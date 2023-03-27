@@ -3,6 +3,16 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from "../../context/user";
 import './signup.css';
 
+/**
+ * Component for showing Signup Page
+ *
+ * @component
+ * @example
+ * return (
+ *   <Signup />
+ * )
+ */
+
 export default function Signup() {
   //set navigation 
   const navigate = useNavigate();

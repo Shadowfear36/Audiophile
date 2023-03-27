@@ -6,6 +6,17 @@ import { UserContext } from '../../context/user';
 import Navbar from '../Navbar';
 import AudioPlayer from '../AudioPlayer';
 import { BsFillHeartFill } from "react-icons/bs";
+
+/**
+ * Component for showing details of an individual album
+ *
+ * @component
+ * @example
+ * return (
+ *   <AlbumPage />
+ * )
+ */
+
 export default function AlbumPage() {
   
   let { id } = useParams();

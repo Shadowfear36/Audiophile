@@ -5,6 +5,16 @@ import { UserContext } from "../../context/user";
 import AudioPlayer from '../AudioPlayer';
 import {useNavigate } from 'react-router-dom';
 
+/**
+ * Component for showing Settings Page
+ *
+ * @component
+ * @example
+ * return (
+ *   <Settings />
+ * )
+ */
+
 export default function Settings() {
 
   // initialize User Context

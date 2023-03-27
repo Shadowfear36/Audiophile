@@ -2,6 +2,16 @@ import React, { useState, useContext, useEffect} from "react";
 import AudioPlayer from "./AudioPlayer";
 import { UserContext } from "../context/user";
 
+/**
+ * Component for allowing a user to upload an audio file/song.
+ *
+ * @component
+ * @example
+ * return (
+ *   <AudioUploadForm />
+ * )
+ */
+
 function AudioUploadForm() {
 
     // initialize User Context

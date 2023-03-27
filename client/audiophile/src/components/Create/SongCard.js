@@ -2,6 +2,16 @@ import React from 'react'
 import '../Home/homecard.css';
 import SongList from '../SongList';
 
+/**
+ * Component for showing details of a song
+ *
+ * @component
+ * @example
+ * return (
+ *   <SongCard props={song object} />
+ * )
+ */
+
 export default function SongCard(props) {
   return (
     <div id="home-card-container">

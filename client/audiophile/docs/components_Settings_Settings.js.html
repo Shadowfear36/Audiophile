@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Settings/Settings.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Settings/Settings.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect, useContext } from 'react'
+import './settings.css';
+import Navbar from '../Navbar';
+import { UserContext } from "../../context/user";
+import AudioPlayer from '../AudioPlayer';
+import {useNavigate } from 'react-router-dom';
+
+/**
+ * Component for showing Settings Page
+ *
+ * @component
+ * @example
+ * return (
+ *   &lt;Settings />
+ * )
+ */
+
+export default function Settings() {
+
+  // initialize User Context
+  const { userState, setUserState } = useContext(UserContext);
+
+  //initialize navigation
+  const navigate = useNavigate();
+  
+  const initialFormState = {
+    name: userState.name,
+    email: userState.email,
+    username: userState.username,
+    password: '',
+    password_confirmation: '12345678',
+    age: userState.age,
+    gender: userState.gender,
+    user_type: userState.user_type,
+  }
+
+  //initialize form state
+  const [formState, setFormState] = useState(initialFormState);
+  
+  // handle form input Change
+  const handleChange = (e) => {
+    setFormState({...formState, [e.target.name]: e.target.value});
+  }
+
+  const handleDeleteAcc = (e) => {
+    e.preventDefault();
+    fetch(`http://localhost:3000/users/${userState.user_id}`, {
+      method: 'DELETE',
+      headers:{
+        'Content-Type': 'application/json'
+    }
+    }).then(res => res.json()).then((obj)=> {
+      console.log(obj);
+      setUserState({
+        isLoggedIn: false,
+        user_id: '',
+        page: '',
+        name: '',
+        username: '',
+        email: '',
+        age: '',
+        gender: '',
+        password_digest: '',
+        user_type: '',
+        currentSong: [],
+        queue: []
+      })
+      navigate('/')
+    });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch(`http://localhost:3000/users/${userState.user_id}`, {
+      method: "PATCH",
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formState)
+    }).then(res => res.json()).then(console.log)
+  }
+
+  const [imageData, setImageData] = useState(null);
+  console.log(imageData);
+  const handleUpload = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData()
+    formData.append('image', imageData)
+
+    console.log(formData);
+
+    fetch(`http://localhost:3000/users/${userState.user_id}`, {
+      method: 'PATCH',
+      body: formData
+    }).then(res => res.json()).then(obj => console.log(obj))
+  };
+
+  return (
+    &lt;div id="settings-page-container">
+      &lt;Navbar/>
+      &lt;div id="settings-container">
+        &lt;h2>Settings&lt;/h2>
+        &lt;input type="file" accept="image/*" id="file" name="image" onChange={(e) => setImageData(e.target.files[0])}/>
+        &lt;button onClick={handleUpload}>Upload&lt;/button>
+        &lt;form id="settings-form" onSubmit={(e) => handleSubmit(e)}>
+          &lt;label for="name">Name&lt;/label>
+          &lt;input type="text" name="name" value={formState.name} onChange={handleChange} />
+          &lt;label for="username">Username&lt;/label>
+          &lt;input type="text" name="username" value={formState.username} onChange={handleChange}/>
+          &lt;label for="email">Email&lt;/label>
+          &lt;input name="email" onChange={handleChange} type="text" value={formState.email}/>
+          &lt;label for="age">Age&lt;/label>
+          &lt;input id="num-inp2" type="number" name="age" min={0} onChange={handleChange} value={formState.age} />
+          &lt;label for="password">Password&lt;/label>
+          &lt;input name="password" onChange={handleChange} type="text" value={formState.password}/>
+          &lt;button id="settings-btn" type="submit">Save&lt;/button>
+        &lt;/form>
+        &lt;button onClick={handleDeleteAcc}id="dlt-act">Delete Account&lt;/button>
+      &lt;div className="audio-player-container">
+                &lt;AudioPlayer />
+      &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  )
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="AudioPlayer.html">AudioPlayer</a></li><li><a href="AudioUploadForm.html">AudioUploadForm</a></li><li><a href="UserProvider.html">UserProvider</a></li><li><a href="module.exports.html">exports</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Mar 27 2023 13:19:00 GMT-0700 (Pacific Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

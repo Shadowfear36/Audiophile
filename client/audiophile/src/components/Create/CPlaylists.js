@@ -5,6 +5,16 @@ import { UserContext } from "../../context/user";
 import AudioUploadForm from '../AudioUploadForm';
 import SongList from "../SongList";
 
+/**
+ * Component for showing the Create Playlist form.
+ *
+ * @component
+ * @example
+ * return (
+ *   <CPlaylists />
+ * )
+ */
+
 export default function CPlaylists() {
         // initialize User Context
         const { userState, setUserState } = useContext(UserContext);

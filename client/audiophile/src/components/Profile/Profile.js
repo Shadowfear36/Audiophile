@@ -7,6 +7,16 @@ import AudioPlayer from '../AudioPlayer';
 import PAlbums from './PAlbums';
 import PPlaylists from './PPlaylists';
 
+/**
+ * Component for showing details of the users profile or other users profiles.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Profile />
+ * )
+ */
+
 export default function Profile() {
   let { username } = useParams();
   const [user, setUser] = useState([]);

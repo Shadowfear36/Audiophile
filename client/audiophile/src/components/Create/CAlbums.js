@@ -5,6 +5,16 @@ import { UserContext } from "../../context/user";
 import AudioUploadForm from '../AudioUploadForm';
 import SongList from "../SongList";
 
+/**
+ * Component for showing the album create form.
+ *
+ * @component
+ * @example
+ * return (
+ *   <CAlbums />
+ * )
+ */
+
 export default function CAlbums() {
         // initialize User Context
         const { userState, setUserState } = useContext(UserContext);

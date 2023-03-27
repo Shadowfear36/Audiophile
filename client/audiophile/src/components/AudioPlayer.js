@@ -3,6 +3,15 @@ import './audioplayer.css';
 import { BsFillPlayFill, BsFillPauseFill } from "react-icons/bs"
 import { UserContext } from "../context/user";
 
+/**
+ * Component for showing an audio player
+ *
+ * @component
+ * @example
+ * return (
+ *   <AudioPlayer />
+ * )
+ */
 
 function AudioPlayer() {
 

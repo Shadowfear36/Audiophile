@@ -4,6 +4,16 @@ import Navbar from '../Navbar.js';
 import AudioPlayer from '../AudioPlayer';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component for Allowing Users To Search other Users, Albums, Songs, & Playlists.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Search />
+ * )
+ */
+
 export default function Search() {
 
 const navigate = useNavigate();

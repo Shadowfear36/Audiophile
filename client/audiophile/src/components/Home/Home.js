@@ -6,6 +6,16 @@ import SongCard from '../SongCard'
 import AlbumItem from '../AlbumItem';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component for showing trending songs, albums, and playlists. Sorted by likes & comments length.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Home />
+ * )
+ */
+
 export default function Home() {
   const [songs, setSongs] = useState([]);
   const [albums, setAlbums] = useState([]);

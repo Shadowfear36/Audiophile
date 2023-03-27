@@ -3,13 +3,38 @@ import './login.css';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { UserContext } from "../../context/user";
 
+
+
+/**
+ * Component for showing Login Page
+ *
+ * @component
+ * @example
+ * return (
+ *   <Login />
+ * )
+ */
+
 export default function Login() {
 
-    // initialize User Context
+    /**
+     * Initalizes user context for the page and allows use of userState, setUserState.
+     */
+
     const { userState, setUserState } = useContext(UserContext);
 
-    //initialize navigation
+    /**
+     * Initalizes the use of Navigation 
+     * @example
+     * navigate('/)
+     */
     const navigate = useNavigate();
+
+
+    /**
+     * initialFormState for Login
+     * @type {{email: string, password: string}}
+     */
 
     //initial state of form
     const initialFormState = {

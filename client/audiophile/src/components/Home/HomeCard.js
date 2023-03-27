@@ -3,6 +3,16 @@ import './homecard.css';
 import SongList from '../SongList';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Component for showing Song Card
+ *
+ * @component
+ * @example
+ * return (
+ *   <HomeCard obj={obj} isSong={boolean} />
+ * )
+ */
+
 export default function HomeCard( {obj, isSong} ) {
 
   //allow navigation
