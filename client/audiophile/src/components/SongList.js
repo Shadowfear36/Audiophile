@@ -31,13 +31,13 @@ export default function SongList({songs, card, full}) {
         }
     })
 
-    const isSongsFull = () => {
-        if (songs.length > 0) {
-            return true
-        } else {
-            return false
-        }
-    }
+    // const isSongsFull = () => {
+    //     if (songs.length > 0) {
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
 
     // console.log(songs.songs);
 

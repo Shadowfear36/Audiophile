@@ -46,7 +46,7 @@ export default function SongItem({ song, i}) {
     useEffect(() => {
       fetch(`http://localhost:3000/users/${userState.user_id}/playlists`)
       .then(res => res.json()).then((obj) => setPlaylists(obj))
-    },[])
+    },[userState.user_id])
 
     const handleAddToPlayList = () => {
       setShowPlaylists(true);

@@ -24,6 +24,7 @@ export default function Home() {
   // initialize User Context
   const { userState, setUserState } = useContext(UserContext);
 
+  setUserState({})
   const navigate = useNavigate();
 
   useEffect(() => {

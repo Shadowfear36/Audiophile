@@ -146,3 +146,8 @@ form > label {
   border-radius: 10px;
   margin-top: 50px;
 }
+
+.active {
+  color: black !important;
+  background-color: white !important;
+}
