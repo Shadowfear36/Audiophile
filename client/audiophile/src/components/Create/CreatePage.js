@@ -41,7 +41,7 @@ export default function CreatePage() {
 
   return (
     userState.isLoggedIn ? <div id="create-page-container">
-      <Navbar />
+      <Navbar page={"create"} />
       <div id="create-wrapper">
         <div id="btn-wrapper-create">
           <button onClick={() => setPageState(1)}>Songs</button>

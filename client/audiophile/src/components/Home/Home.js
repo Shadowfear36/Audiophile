@@ -23,8 +23,7 @@ export default function Home() {
 
   // initialize User Context
   const { userState, setUserState } = useContext(UserContext);
-
-  setUserState({})
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,9 +56,10 @@ export default function Home() {
     </div>
   });
 
+  
   return (
     userState.isLoggedIn ? <div id="home-container">
-        <Navbar/>
+        <Navbar page={'home'}/>
         <div id="home-wrapper">
           <h2>Trending</h2>
             <h4>Songs</h4>

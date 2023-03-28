@@ -29,6 +29,7 @@ const [playlists, setPlaylists] = useState([]);
 const { userState, setUserState } = useContext(UserContext);
 
 useEffect(() => {
+  setUserState({...userState, page: "search"})
   fetch(`http://localhost:3000/search/${searchTerm}`)
   .then(res => res.json()).then((obj) => {
     setUsers(obj.users)
@@ -72,7 +73,7 @@ const renderPlaylists = playlists.map(playlist => {
 
   return (
     userState.isLoggedIn ? <div id="search-container">
-      <Navbar />
+      <Navbar page={"search"}/>
       <div id="search-wrapper">
           <h2>Search</h2>
           <input id="search-bar-input" placeholder="Find Users, Songs, Playlists, & Albums" onChange={(e) => setSearchTerm(e.target.value)}/>

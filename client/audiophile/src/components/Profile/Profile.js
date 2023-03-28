@@ -69,7 +69,7 @@ export default function Profile() {
 
   return (
     userState.isLoggedIn ? <div id="profile-page-container">
-        <Navbar />
+        <Navbar page={"profile"}/>
         <div id="profile-wrapper">
             <div id="profile-hdr">
               <img id="pfp-profile" src={checkIfPfpAvailable ? image : "https://place-hold.it/100"} />

@@ -31,7 +31,7 @@ export default function Music() {
   console.log(songs);
   return (
     userState.isLoggedIn ? <div id="music-page-container">
-      <Navbar/>
+      <Navbar page={"music"}/>
       <div id="music-page-wrapper">
         <h2>Liked Songs</h2>
         <div id="song-list-cont">

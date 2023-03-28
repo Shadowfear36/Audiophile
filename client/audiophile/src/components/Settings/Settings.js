@@ -98,7 +98,7 @@ export default function Settings() {
 
   return (
     userState.isLoggedIn ? <div id="settings-page-container">
-      <Navbar/>
+      <Navbar page={"settings"}/>
       <div id="settings-container">
         <h2>Settings</h2>
         <input type="file" accept="image/*" id="file" name="image" onChange={(e) => setImageData(e.target.files[0])}/>
