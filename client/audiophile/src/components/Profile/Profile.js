@@ -46,7 +46,25 @@ export default function Profile() {
       );  
   }, [])
 
-  console.log(user);
+  const [psongs, setPSongs] = useState(false);
+  const [palbums, setPAlbums] = useState(false);
+  const [pplaylist, setPPlaylists] = useState(false);
+
+  useEffect(() => {
+    if (pageState === 1) {
+      setPSongs(true);
+      setPAlbums(false);
+      setPPlaylists(false);
+    } else if (pageState === 2) {
+      setPSongs(false);
+      setPAlbums(true);
+      setPPlaylists(false);
+    } else if (pageState === 3) {
+      setPSongs(false);
+      setPAlbums(false);
+      setPPlaylists(true);
+    }
+  }, [pageState])
 
   const renderPage = () => {
     if (pageState === 1) {
@@ -79,9 +97,9 @@ export default function Profile() {
               </div>
             </div>
             <div id="btn-cluster-profile">
-                <button onClick={() => setPageState(1)}>Songs</button>
-                <button onClick={() => setPageState(2)}>Albums</button>
-                <button onClick={() => setPageState(3)}>Playlist</button>
+                <button className={psongs ? "active" : null} onClick={() => setPageState(1)}>Songs</button>
+                <button className={palbums ? "active" : null} onClick={() => setPageState(2)}>Albums</button>
+                <button className={pplaylist ? "active" : null} onClick={() => setPageState(3)}>Playlist</button>
             </div>
             <div id="profile-content-container">
                 {renderPage()}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import './createpage.css';
 import AudioUploadForm from '../AudioUploadForm';
 import Navbar from '../Navbar';
@@ -28,6 +28,29 @@ export default function CreatePage() {
 
   const [pageState, setPageState] = useState(1)
 
+  const [csongs, setCSongs] = useState(false)
+  const [calbums, setCAlbums] = useState(false);
+  const [cplaylists, setCPlaylists] = useState(false);
+
+
+  useEffect(() => {
+    if (pageState === 1) {
+      setCSongs(true);
+      setCAlbums(false);
+      setCPlaylists(false);
+    }
+    if (pageState === 2) {
+      setCAlbums(true);
+      setCSongs(false)
+      setCPlaylists(false);
+    }
+    if (pageState === 3) {
+      setCPlaylists(true);
+      setCSongs(false);
+      setCAlbums(false);
+    }
+  },[pageState])
+
   const renderPage = () => {
     if (pageState === 1) {
       return <CSongs />
@@ -44,9 +67,9 @@ export default function CreatePage() {
       <Navbar page={"create"} />
       <div id="create-wrapper">
         <div id="btn-wrapper-create">
-          <button onClick={() => setPageState(1)}>Songs</button>
-          <button onClick={() => setPageState(2)}>Albums</button>
-          <button onClick={() => setPageState(3)}>Playlist</button>
+          <button className={csongs ? 'active' : null} onClick={() => setPageState(1)}>Songs</button>
+          <button className={calbums ? 'active' : null} onClick={() => setPageState(2)}>Albums</button>
+          <button className={cplaylists ? 'active' : null} onClick={() => setPageState(3)}>Playlist</button>
         </div>
         {renderPage()}
       </div>
