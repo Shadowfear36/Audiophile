@@ -27,7 +27,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/trending")
+    fetch("api/trending")
     .then(res => res.json())
     .then((obj) => {
       setSongs(obj.songs)

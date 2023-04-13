@@ -33,7 +33,7 @@ export default function CAlbums() {
           formData.append("name", albumName)
           formData.append("image", imageData)
     
-          fetch('http://localhost:3000/albums', {
+          fetch('api/albums', {
             method: 'POST',
             body: formData
           }).then(res => res.json()).then(obj => console.log(obj))

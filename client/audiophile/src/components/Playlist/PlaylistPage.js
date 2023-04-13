@@ -34,7 +34,7 @@ export default function PlaylistPage() {
   const { userState, setUserState } = useContext(UserContext);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/playlists/${id}`)
+    fetch(`api/playlists/${id}`)
     .then(res => res.json()).then((obj) => {
       setPlaylist(obj)
       setComments(obj.comments)
@@ -43,7 +43,7 @@ export default function PlaylistPage() {
   },[])
 
   const handleLike = () => {
-    fetch(`http://localhost:3000/poly_likes`, {
+    fetch(`api/poly_likes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -56,7 +56,7 @@ export default function PlaylistPage() {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/poly_comments`, {
+    fetch(`api/poly_comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

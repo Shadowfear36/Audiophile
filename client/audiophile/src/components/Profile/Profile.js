@@ -34,7 +34,7 @@ export default function Profile() {
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/users/${username}`)
+    fetch(`api/users/${username}`)
     .then(res => res.json()).then((obj)=> {
       setUser(obj)
       setSongs(obj.songs)

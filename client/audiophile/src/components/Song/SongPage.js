@@ -29,7 +29,7 @@ export default function SongPage() {
   const [userComment, setUserComment] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:3000/songs/${id}`)
+    fetch(`api/songs/${id}`)
     .then(res => res.json()).then((obj) => {
       setSong(obj)
       setComments(obj.comments)
@@ -38,7 +38,7 @@ export default function SongPage() {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/poly_comments`, {
+    fetch(`api/poly_comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

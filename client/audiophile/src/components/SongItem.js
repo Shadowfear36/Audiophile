@@ -32,7 +32,7 @@ export default function SongItem({ song, i}) {
     }
 
     const handleLike = () => {
-      fetch(`http://localhost:3000/poly_likes`, {
+      fetch(`api/poly_likes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -44,7 +44,7 @@ export default function SongItem({ song, i}) {
     }
 
     useEffect(() => {
-      fetch(`http://localhost:3000/users/${userState.user_id}/playlists`)
+      fetch(`api/users/${userState.user_id}/playlists`)
       .then(res => res.json()).then((obj) => setPlaylists(obj))
     },[userState.user_id])
 
@@ -53,7 +53,7 @@ export default function SongItem({ song, i}) {
     }
 
     const submitAddToPlaylist = () => {
-      fetch(`http://localhost:3000/playlist_songs`, {
+      fetch(`api/playlist_songs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify({

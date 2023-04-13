@@ -34,14 +34,14 @@ function AudioUploadForm() {
       formData.append('image', imageData)
       formData.append('album_id', album)
 
-      fetch('http://localhost:3000/songs', {
+      fetch('api/songs', {
         method: 'POST',
         body: formData
       }).then(res => res.json()).then(obj => console.log(obj))
     };
 
     useEffect(()=> {
-      fetch(`http://localhost:3000/users/${userState.user_id}/albums`)
+      fetch(`api/users/${userState.user_id}/albums`)
       .then(res =>res.json()).then(obj => setAlbumList(obj))
     },[])
 
