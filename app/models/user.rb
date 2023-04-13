@@ -6,20 +6,20 @@ class User < ApplicationRecord
     validates_uniqueness_of :username, :email
 
 
-    has_many :albums
-    has_many :songs
-    has_many :playlists
+    has_many :albums, :dependent => :destroy
+    has_many :songs, :dependent => :destroy
+    has_many :playlists, :dependent => :destroy
 
-    has_many :poly_comments
-    has_many :poly_likes
+    has_many :poly_comments, :dependent => :destroy
+    has_many :poly_likes, :dependent => :destroy
 
-    has_many :liked_songs, through: :poly_likes, source: :likeable, source_type: 'Song'
-    has_many :liked_albums, through: :poly_likes, source: :likeable, source_type: 'Album'
-    has_many :liked_playlists, through: :poly_likes, source: :likeable, source_type: 'Playlist'
+    has_many :liked_songs, through: :poly_likes, source: :likeable, source_type: 'Song', :dependent => :destroy
+    has_many :liked_albums, through: :poly_likes, source: :likeable, source_type: 'Album', :dependent => :destroy
+    has_many :liked_playlists, through: :poly_likes, source: :likeable, source_type: 'Playlist', :dependent => :destroy
 
     
 
-    has_one_attached :image, service: :google
+    has_one_attached :image, service: :google, :dependent => :destroy
 
     def image_url
         if self.image.attached?
