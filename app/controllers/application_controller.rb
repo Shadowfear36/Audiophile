@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::API
+    include ActionController::Cookies
     include SessionsHelper
-#     before_action :set_headers
+    before_action :authenticate_user
 
-# def set_headers
-#   headers['Access-Control-Allow-Origin'] = '*'
-#   headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
-#   headers['Access-Control-Request-Method'] = '*'
-#   headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-# end
+    private
+
+    def authenticate_user
+        render json: "Not Authorized", status: :unauthorized unless current_user
+    end
 end
