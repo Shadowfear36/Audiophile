@@ -77,7 +77,7 @@ export default function Login() {
     //handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('api/login', {
+        fetch('/api/login', {
             method:'POST',
             headers:{
                 'Content-Type': 'application/json'

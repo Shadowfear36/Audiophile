@@ -56,7 +56,7 @@ export default function PlaylistPage() {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    fetch(`api/poly_comments`, {
+    fetch(`/api/poly_comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

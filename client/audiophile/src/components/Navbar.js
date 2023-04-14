@@ -22,7 +22,7 @@ export default function Navbar({ page }) {
     const { userState, setUserState } = useContext(UserContext);
 
     const handleLogout = () => {
-      fetch('api/logout', {
+      fetch('/api/logout', {
         method: 'POST',
         headers:{
           'Content-Type': 'application/json'

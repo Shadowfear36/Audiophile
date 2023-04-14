@@ -44,7 +44,7 @@ export default function Settings() {
 
   const handleDeleteAcc = (e) => {
     e.preventDefault();
-    fetch(`api/users/${userState.user_id}`, {
+    fetch(`/api/users/${userState.user_id}`, {
       method: 'DELETE',
       headers:{
         'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ export default function Settings() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`api/users/${userState.user_id}`, {
+    fetch(`/api/users/${userState.user_id}`, {
       method: "PATCH",
       headers:{
         'Content-Type': 'application/json'
@@ -90,7 +90,7 @@ export default function Settings() {
 
     console.log(formData);
 
-    fetch(`api/users/${userState.user_id}`, {
+    fetch(`/api/users/${userState.user_id}`, {
       method: 'PATCH',
       body: formData
     }).then(res => res.json()).then(obj => console.log(obj))

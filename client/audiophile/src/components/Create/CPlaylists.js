@@ -33,7 +33,7 @@ export default function CPlaylists() {
           formData.append("name", playlistName)
           formData.append("image", imageData)
     
-          fetch('api/playlists', {
+          fetch('/api/playlists', {
             method: 'POST',
             body: formData
           }).then(res => res.json()).then(obj => console.log(obj))

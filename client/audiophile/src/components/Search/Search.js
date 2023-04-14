@@ -30,7 +30,7 @@ const { userState, setUserState } = useContext(UserContext);
 
 useEffect(() => {
   setUserState({...userState, page: "search"})
-  fetch(`api/search/${searchTerm}`)
+  fetch(`/api/search/${searchTerm}`)
   .then(res => res.json()).then((obj) => {
     setUsers(obj.users)
     setAlbums(obj.albums)

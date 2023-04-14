@@ -30,7 +30,7 @@ export default function AlbumPage() {
   const [userComment, setUserComment] = useState('');
 
   useEffect(() => {
-    fetch(`api/albums/${id}`)
+    fetch(`/api/albums/${id}`)
     .then(res => res.json()).then((obj) => {
       setAlbum(obj)
       setComments(obj.comments)
@@ -40,7 +40,7 @@ export default function AlbumPage() {
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    fetch(`api/poly_comments`, {
+    fetch(`/api/poly_comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -64,7 +64,7 @@ export default function AlbumPage() {
   })
 
   const handleLike = () => {
-    fetch(`api/poly_likes`, {
+    fetch(`/api/poly_likes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

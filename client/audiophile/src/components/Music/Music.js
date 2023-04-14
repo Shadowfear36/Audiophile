@@ -24,7 +24,7 @@ export default function Music() {
   const { userState, setUserState } = useContext(UserContext);
   
   useEffect(() => {
-    fetch(`api/users/${userState.username}/likes`)
+    fetch(`/api/users/${userState.username}/likes`)
     .then(res => res.json()).then(obj => setSongs(obj))
   },[])
 
